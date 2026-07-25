@@ -1,0 +1,16 @@
+{
+  "name": "Lane 4 — Sprint Week",
+  "short_name": "Lane 4",
+  "description": "Weekly sprint training plan built backward from your next meet. Track work and gym work, day by day.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070B16",
+  "theme_color": "#070B16",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
