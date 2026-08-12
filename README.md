@@ -42,28 +42,71 @@ Then open `http://localhost:8000`.
 
 ## What it actually does
 
-You give it four things: **meet date**, **main event**, **years of training**, **days per week**.
-Everything else is calculated.
+You give it four things: **meet date**, **main event**, **years of training**, and **which days
+you take off**. Everything else is calculated.
+
+### You choose the days off; the week builds around them
+
+Pick any combination of rest days in setup (default is Thursday and Sunday). The generator
+then lays out the remaining days itself:
+
+1. It places the **quality days** — two high-neural track sessions plus one lift-led day —
+   spread as evenly as possible around the week, wrapping Sunday to Monday, so two hard days
+   can never land back to back.
+2. The first leftover day becomes the **tempo day**; the rest become recovery.
+3. The three lift days attach to the quality days in order: **Day A** on the first,
+   **Day B** on the middle lift-led day, **Day C** on the last.
+4. The single jump session attaches to the first quality day.
+
+Take four or more days off and it drops the lift-led middle day first, giving two quality days
+and two lifts. Take only one day off and you get an extra recovery day, not extra hard work.
+
+So a week with Thursday and Sunday off comes out Monday / Wednesday / Friday. Take weekends
+off instead and it becomes Monday / Wednesday / Friday with Thursday as recovery. Take Monday
+and Friday off and it shifts to Tuesday / Thursday / Saturday. Same structure, your calendar.
+
+The lift days always follow the same wave: 8–12 reps → 5–7 → 3–5. Olympic derivatives stay at
+3 reps on all of them — the wave applies to the squats, pulls and presses. Nobody cleans for ten.
 
 ### Phase comes from how far out the meet is
 
-| Weeks to the meet | Phase | Emphasis |
+| Weeks to the meet | Phase | What changes |
 |---|---|---|
-| 17+ | Off-season | Hills, resisted acceleration, hypertrophy lifting, big tempo volume |
-| 11–16 | Pre-season | Blocks, max velocity, max-strength lifting, speed endurance appears |
-| 5–10 | Sharpening | Max velocity leads, power lifting, special endurance for 200m runners |
-| 0–4 | Race season | Two high days a week, low volume, very high quality |
+| 17+ | Off-season | Hills and bounding Monday, uphill 200s or max velocity Friday |
+| 11–16 | Pre-season | Max velocity Monday, speed endurance Friday |
+| 5–10 | Sharpening | Same shape, extended bounding, 200m runners get special endurance |
+| 0–4 | Race season | Two lifts, two high days, Wednesday becomes recovery |
 
 ### Volume rides a 3-week wave
 
-Introduce (80%) → Stabilize (100%) → Unload (60%), repeating. The session structure stays the
-same week to week; only the number of reps moves. That consistency is deliberate — it's what
-makes it possible to tell whether training is working.
+Introduce (80%) → Stabilize (100%) → Unload (60%), repeating. The session *structure* never
+changes; only the number of reps and sets. That consistency is deliberate — it's what makes it
+possible to tell whether the training is working.
+
+### The uphill 200s
+
+They run on Stabilize weeks only, off-season and pre-season only — roughly once every three
+weeks, and never inside two weeks of a meet. Distance is scaled by training age: 3 × 100m for
+a first-year athlete, 2 × 150m at two to three years, 2 × 180m after that. The grade caps
+velocity, which is what makes a maximal effort safe for a young hamstring.
+
+### The Olympic lifts are gated by training age
+
+| Years training | Day A | Day B | Day C |
+|---|---|---|---|
+| 1st year | Clean-grip shrug + mid-thigh pull | Clean-grip high pull | Jump shrug |
+| 2nd–3rd | Mid-thigh pull | Hang power clean from the knee | Power clean from blocks |
+| 4+ | Mid-thigh pull | Hang power clean | Power clean |
+
+A first-year athlete never catches a bar. The pulls deliver a large share of the power
+adaptation without the technical cost, so she builds force from week one while the catch is
+still being taught. Front squat sits on Day B every week regardless of level, because the
+front rack is the prerequisite for everything in the clean family.
 
 ### The last 7 days are a taper
 
-Once the meet is inside the displayed week, the normal template is thrown out and days are
-assigned by how far they sit from race day:
+Once the meet falls inside the displayed week, the template is discarded and days are assigned
+by distance from race day:
 
 ```
 -6  off
@@ -78,31 +121,40 @@ assigned by how far they sit from race day:
 +3  easy tempo
 ```
 
-Racing most weekends? Update the meet date after each race and the next one gets the same
-treatment.
+No lifting inside three days either side of a race. Racing most weekends? Update the meet date
+after each one and the next gets the same treatment.
 
 ### Hard rules the generator will not break
 
-- Every day is either **HIGH** (≥95% effort) or **LOW** (≤75%). Nothing in the middle, ever —
-  that zone costs recovery and returns nothing.
-- Never two HIGH days back to back. Minimum 48 hours between them.
-- Max three HIGH days a week in training phases, two in race season.
-- Rest on speed work is roughly one minute per 10m sprinted, and it's printed on every rep.
-- Gym work is stacked on HIGH days, right after the track session. LOW days get bodyweight
-  circuits and med ball only — no lifting, no jumps.
-- No lifting inside three days of a meet.
+- Every day is **HIGH** (≥95%) or **LOW** (≤75%). Nothing in between, ever — that zone costs
+  recovery and returns nothing.
+- Never two HIGH days back to back; 48 hours minimum.
+- Max three HIGH days a week, two in race season.
+- Race week ignores the layout and tapers by distance from the meet — but it still respects
+  your days off, apart from race day itself.
+- Rest on speed work is roughly one minute per 10m sprinted, printed on every rep.
+- Exactly one jump session a week, on Monday, following the in-place → short-response →
+  extended-bounding progression across the year.
+- Low days get bodyweight circuits and med ball only — no lifting, no jumps.
 
 Volumes scale by training age: a first-year athlete gets about 70% of the reps an experienced
 one does.
 
 ## Where the training model comes from
 
-Charlie Francis's high–low intensity split (via Derek Hansen's write-ups), Dan Pfaff and
-Stuart McMillan's ALTIS Introduce/Stabilize/Unload cycling and warm-up structure, Tony Holler's
-"Feed the Cats" bias toward short, fast, well-rested sprinting, Boo Schexnayder's plyometric
-progression and general strength circuits, Jonas Dodoo's wickets and sprint-float-sprint work,
-and Randy Huntington's resisted-sprint use. Rest intervals and volume caps follow NSCA
-guidance for adolescent athletes.
+The weekly shape, the three lift days and the 8–12 / 5–7 / 3–5 wave come from a Division I
+program's published training week. The exercise menu — power clean, hang clean, clean-grip
+shrug, mid-thigh pull, back squat, quarter squat, push press, push jerk, weighted jumps,
+stiff-leg deadlift, incline press, dumbbell rows — mirrors what that program actually uses,
+which in turn lines up with survey data on Olympic sprint and jump coaches (essentially all of
+whom use squat variations and weightlifting derivatives).
+
+The intensity rules on top of it are Charlie Francis's high–low split (via Derek Hansen's
+write-ups). The three-week Introduce/Stabilize/Unload cycling and the warm-up structure are
+Dan Pfaff and Stuart McMillan's ALTIS model. The bias toward short, fast, well-rested sprinting
+is Tony Holler. The jump progression and general strength circuits are Boo Schexnayder. Wickets
+and sprint-float-sprint are Jonas Dodoo. Rest intervals, volume caps and the youth-lifting
+progression follow NSCA guidance for adolescent athletes.
 
 ## Editing the workouts
 
