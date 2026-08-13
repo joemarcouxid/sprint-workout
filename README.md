@@ -68,6 +68,81 @@ and Friday off and it shifts to Tuesday / Thursday / Saturday. Same structure, y
 The lift days always follow the same wave: 8–12 reps → 5–7 → 3–5. Olympic derivatives stay at
 3 reps on all of them — the wave applies to the squats, pulls and presses. Nobody cleans for ten.
 
+### Every event gets trained: 60, 100, 200, 400
+
+The first quality day is **always** acceleration or max velocity. That never gets traded away,
+because top speed is what the 60 and 100 are made of and it's the quality that disappears
+fastest when you neglect it.
+
+The **third** quality day rotates on the three-week cycle, so each energy system gets touched
+once per cycle and no single week ever carries two lactic sessions:
+
+| Cycle week | Session | Serves |
+|---|---|---|
+| Introduce | Speed endurance — 150m reps, full recovery | 200 |
+| Stabilize | Special endurance — 300m reps at 90%, 12–15 min rest | 400 |
+| Unload | Intensive tempo — 2 × 4 × 200m at 80–85%, short rest | lactate buffering |
+
+In the sharpening phase the Stabilize session becomes the **split 400** — two sets of 2 × 200m
+at race-split pace with only 45 seconds between the pair. It's the most race-specific 400m
+workout there is, and it's held back until the base work is done.
+
+In race season the rotation drops to short speed endurance, because racing a 200 or a 400 *is*
+a lactic session and doesn't need doubling up.
+
+### Target paces
+
+Enter a 100, a 200, and a 400 goal in setup, and every relevant session prints a real time
+instead of a percentage. Fill in what you have — the model fills the rest in from standard
+sprint relationships (a 150 is about 0.745 of an open 200, an 80 about 0.83 of a 100, and the
+first 300 of a 400 about 0.715 of the full race). A rep "at 90%" is then that best divided
+by 0.90.
+
+Race day also prints a split plan: first 200, second 200, and the goal. The differential
+matters more than the total — going through 200 at anywhere near open-200 pace is what causes
+tying up in the last 100.
+
+### Reading the 200-to-400 gap
+
+Double the open 200 and compare to the open 400. Roughly:
+
+| Gap | Reading |
+|---|---|
+| 3.5–4.5s | Well conditioned for the 400 |
+| 5–6s | Moderately trained |
+| 7s+ | The event hasn't been trained — lactic power is the limiter |
+
+Do the same with 100→200: doubled 100 versus open 200. Under about 1.2 seconds means good
+speed endurance. A small 100→200 gap with a large 200→400 gap is the classic profile of a
+sprinter with real speed and an untrained fourth lap — which is what the **400** event setting
+is built for. It runs special endurance two weeks in three, while still protecting the max
+velocity day every single week.
+
+### About lactate clearance
+
+Three things in the program do this work, and they're deliberate:
+
+- **Extensive tempo** on the low day builds the capillary density and mitochondrial capacity
+  that clear lactate between reps and between rounds at a meet. This is the aerobic support a
+  400m runner needs — and it's the reason the tempo day survives even in race season.
+- **Intensive tempo** at 80–85% with short rests is the buffering stimulus proper: acidity
+  accumulates and the body adapts to tolerating and shifting it.
+- **Active recovery** is printed on every lactic session. Walking through the rest clears
+  lactate roughly twice as fast as sitting, and the same applies between rounds at a meet.
+
+Note the honest disagreement in the source material here: Tony Holler argues aerobic work has
+no place in sprint training at all. That's a defensible position for a pure 60/100 athlete. For
+someone racing the 400, the Classifying Sprint Training Methods material and the ALTIS 200m
+program both retain tempo work, and this app follows them.
+
+### A note on MED days
+
+Adding intensive tempo breaks the strict Francis high–low rule on purpose, and it's the one
+place the app does so. The justification is event-specific: the 400 is roughly 30% phosphate
+and 70% lactate, so a program that only ever runs at ≥95% or ≤75% simply never trains the
+system that decides the race. It appears once every three weeks, on the Unload week, when the
+rest of the load is lightest.
+
 ### Phase comes from how far out the meet is
 
 | Weeks to the meet | Phase | What changes |
