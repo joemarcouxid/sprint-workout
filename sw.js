@@ -1,6 +1,6 @@
 /* Lane 4 — offline cache.
    Bump CACHE when you change any file, or phones will keep serving the old version. */
-const CACHE = 'lane4-v7';
+const CACHE = 'lane4-v9';
 const FILES = [
   './',
   './index.html',
