@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#070B16">
-<meta name="description" content="Weekly sprint training plan built backward from your next meet. Track work and gym work, day by day.">
-<title>LANE 4 — Sprint Week</title>
+<meta name="description" content="Your training week, built backward from your next meet.">
+<title>LANE 4</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Lane 4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#070B16; --ink2:#0E1526; --ink3:#161F38; --line:#243052;
@@ -21,237 +21,224 @@
   --gold:#FFC53D; --torch:#FF5A34; --cool:#35D6BE; --amber:#F0913A; --slate:#55618A; --lane:#3D8BFF;
   --display:'Barlow Condensed','Oswald','Arial Narrow',system-ui,sans-serif;
   --body:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --data:'Roboto Mono',ui-monospace,'SFMono-Regular',monospace;
-  --r:14px;
+  --data:'Roboto Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
-body{
-  background:var(--ink); color:var(--chalk); font-family:var(--body);
-  font-size:16px; line-height:1.45; overflow-x:hidden;
-  padding:0 0 env(safe-area-inset-bottom);
-  -webkit-font-smoothing:antialiased;
-}
+body{background:var(--ink);color:var(--chalk);font-family:var(--body);font-size:16px;line-height:1.45;
+  overflow-x:hidden;padding:0 0 env(safe-area-inset-bottom);-webkit-font-smoothing:antialiased}
 .wrap{max-width:640px;margin:0 auto;padding:0 16px 64px}
 h1,h2,h3,.disp{font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;margin:0}
 .num{font-family:var(--data);font-variant-numeric:tabular-nums}
 button{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;cursor:pointer}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
-.hidden{display:none !important}
+.hidden{display:none!important}
 
-/* ---------- header / start block ---------- */
-.hdr{position:relative;background:linear-gradient(180deg,#0D1730 0%,#0A1124 100%);
-     border-bottom:1px solid var(--line);padding:calc(20px + env(safe-area-inset-top)) 0 18px;overflow:hidden}
-.hdr .lanes{position:absolute;inset:0;opacity:.16;pointer-events:none}
+/* ---------- header ---------- */
+.hdr{position:relative;background:linear-gradient(160deg,#12203F 0%,#0A1124 55%,#080D1B 100%);
+  border-bottom:1px solid var(--line);padding:calc(18px + env(safe-area-inset-top)) 0 16px;overflow:hidden}
+.hdr .lanes{position:absolute;inset:0;width:100%;height:100%;opacity:.18;pointer-events:none}
+.hdr .hero{position:absolute;right:-14px;bottom:-16px;width:190px;height:auto;opacity:.5;pointer-events:none}
 .hdr .inner{position:relative;max-width:640px;margin:0 auto;padding:0 16px}
-.brand{display:flex;align-items:center;gap:9px;margin-bottom:14px}
-.brand .mark{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--gold);
-  display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:14px;color:var(--gold);line-height:1}
+.brand{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.brand .mark{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--gold);display:grid;place-items:center;
+  font-family:var(--display);font-weight:800;font-size:14px;color:var(--gold);line-height:1}
 .brand b{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:.09em}
-.brand span{font-size:11px;letter-spacing:.16em;color:var(--dimmer);text-transform:uppercase;font-weight:600}
+.brand span{font-size:11px;letter-spacing:.15em;color:var(--dimmer);text-transform:uppercase;font-weight:600}
 .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);font-weight:700}
-.countdown{display:flex;align-items:baseline;gap:12px;margin:4px 0 2px}
-.countdown .big{font-family:var(--display);font-weight:800;font-size:76px;line-height:.86;color:var(--gold);
-  font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.countdown .unit{font-family:var(--display);font-weight:700;font-size:19px;color:var(--chalk);letter-spacing:.08em}
-.countdown .unit small{display:block;font-family:var(--body);font-size:13px;letter-spacing:0;
-  text-transform:none;color:var(--dim);font-weight:500}
-.phaseline{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
-.pill{font-family:var(--display);font-weight:700;font-size:12.5px;letter-spacing:.11em;
-  padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--dim);background:#0A1122}
+.countdown{display:flex;align-items:baseline;gap:11px;margin:2px 0}
+.countdown .big{font-family:var(--display);font-weight:800;font-size:74px;line-height:.86;color:var(--gold);
+  font-variant-numeric:tabular-nums}
+.countdown .unit{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:.08em}
+.countdown .unit small{display:block;font-family:var(--body);font-size:13px;letter-spacing:0;text-transform:none;
+  color:var(--dim);font-weight:500}
+.phaseline{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-family:var(--display);font-weight:700;font-size:12.5px;letter-spacing:.1em;padding:4px 9px;
+  border-radius:999px;border:1px solid var(--line);color:var(--dim);background:#0A1122}
 .pill.on{color:var(--ink);background:var(--gold);border-color:var(--gold)}
 .pill.load{color:var(--cool);border-color:#1B4A48;background:#08191C}
 
 /* ---------- week nav ---------- */
-.weeknav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:18px 0 12px}
+.weeknav{display:flex;align-items:center;gap:8px;margin:18px 0 12px}
 .weeknav .lbl{text-align:center;flex:1}
 .weeknav .lbl b{font-family:var(--display);font-size:17px;letter-spacing:.09em;display:block}
 .weeknav .lbl span{font-size:12px;color:var(--dim);font-family:var(--data)}
 .arrow{width:44px;height:44px;border-radius:12px;background:var(--ink2);border:1px solid var(--line);
   display:grid;place-items:center;color:var(--dim);font-size:20px;flex:none}
-.arrow:active{background:var(--ink3)}
-.arrow[disabled]{opacity:.3}
+.arrow:active{background:var(--ink3)} .arrow[disabled]{opacity:.3}
 
-/* ---------- lane rows ---------- */
+/* ---------- lanes ---------- */
 .lane-list{display:flex;flex-direction:column;gap:9px}
-.lane{background:var(--ink2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
-  position:relative;transition:border-color .15s}
+.lane{background:var(--ink2);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .15s}
 .lane.today{border-color:var(--gold)}
-.lane .head{display:flex;align-items:stretch;gap:0;width:100%;text-align:left;padding:0}
+.lane .head{display:flex;align-items:stretch;width:100%;text-align:left;padding:0}
 .stripe{width:7px;flex:none;background:var(--slate)}
 .lane[data-tag="HIGH"] .stripe{background:var(--torch)}
-.lane[data-tag="LOW"] .stripe{background:var(--cool)}
 .lane[data-tag="MED"] .stripe{background:var(--amber)}
+.lane[data-tag="LOW"] .stripe{background:var(--cool)}
 .lane[data-tag="RACE"] .stripe{background:var(--gold)}
-.laneno{width:52px;flex:none;display:grid;place-items:center;border-right:1px solid var(--line);background:#0B1223}
-.laneno b{font-family:var(--display);font-size:22px;font-weight:800;line-height:1;color:var(--chalk)}
-.laneno span{font-size:9.5px;letter-spacing:.14em;color:var(--dimmer);font-weight:700;text-transform:uppercase}
-.lane.today .laneno{background:#151021}
-.lane.today .laneno b{color:var(--gold)}
-.headtxt{flex:1;padding:12px 12px 12px 13px;min-width:0}
+.laneno{width:54px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  border-right:1px solid var(--line);background:#0B1223}
+.laneno .fig{width:26px;height:30px;display:block}
+.laneno span{font-size:9.5px;letter-spacing:.13em;color:var(--dimmer);font-weight:700;text-transform:uppercase}
+.lane.today .laneno{background:#161020}
+.headtxt{flex:1;padding:12px 10px 12px 13px;min-width:0}
 .headtxt .row1{display:flex;align-items:center;gap:7px;margin-bottom:2px;flex-wrap:wrap}
-.tag{font-family:var(--display);font-size:10.5px;font-weight:800;letter-spacing:.14em;padding:2px 6px;border-radius:4px;
+.tag{font-family:var(--display);font-size:10.5px;font-weight:800;letter-spacing:.13em;padding:2px 6px;border-radius:4px;
   background:var(--slate);color:#0A0F1C}
 .lane[data-tag="HIGH"] .tag{background:var(--torch);color:#180400}
-.lane[data-tag="LOW"] .tag{background:var(--cool);color:#00201C}
 .lane[data-tag="MED"] .tag{background:var(--amber);color:#231600}
+.lane[data-tag="LOW"] .tag{background:var(--cool);color:#00201C}
 .lane[data-tag="RACE"] .tag{background:var(--gold);color:#1D1400}
-.todaytag{font-family:var(--display);font-size:10.5px;font-weight:800;letter-spacing:.14em;color:var(--gold)}
+.todaytag{font-family:var(--display);font-size:10.5px;font-weight:800;letter-spacing:.13em;color:var(--gold)}
 .headtxt h3{font-size:20px;font-weight:700;letter-spacing:.03em;line-height:1.15}
 .headtxt .meta{font-family:var(--data);font-size:11.5px;color:var(--dim);margin-top:3px}
-.chev{width:40px;flex:none;display:grid;place-items:center;color:var(--dimmer);font-size:13px;
-  transition:transform .2s}
+.chev{width:36px;flex:none;display:grid;place-items:center;color:var(--dimmer);font-size:12px;transition:transform .2s}
 .lane.open .chev{transform:rotate(180deg)}
 
 /* ---------- detail ---------- */
-.detail{padding:0 14px 16px 20px;border-top:1px solid var(--line);margin-top:-1px}
-.blk{margin-top:16px}
-.blk > h4{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:.17em;color:var(--dim);
-  padding-bottom:6px;border-bottom:1px solid var(--line);margin:0 0 9px}
-.blk > h4 em{font-style:normal;color:var(--dimmer);font-weight:600;letter-spacing:.06em;float:right;
-  font-family:var(--body);font-size:11px;text-transform:none}
+.detail{padding:0 14px 16px 20px;border-top:1px solid var(--line)}
+.blk{margin-top:15px}
+.blk>h4{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--dim);
+  padding-bottom:6px;border-bottom:1px solid var(--line);margin:0 0 8px}
 .item{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed #1A2340}
 .item:last-child{border-bottom:none}
-.item .k{font-family:var(--data);font-size:13px;font-weight:700;color:var(--gold);flex:none;min-width:74px;padding-top:1px}
+.item .k{font-family:var(--data);font-size:12.5px;font-weight:700;color:var(--gold);flex:none;min-width:70px;padding-top:2px}
 .item .v{flex:1;min-width:0}
 .item .v b{font-weight:600;font-size:15.5px;display:block}
 .item .v small{display:block;color:var(--dim);font-size:12.5px;line-height:1.4;margin-top:1px}
-.item .v small.rest{color:var(--cool);font-family:var(--data);font-size:11.5px;letter-spacing:.02em}
-.plain{color:var(--dim);font-size:14px;line-height:1.55}
+.item .v small.rest{color:var(--cool);font-family:var(--data);font-size:11.5px}
+.plain{color:var(--dim);font-size:14px;line-height:1.55;margin:0 0 8px}
 .plain b{color:var(--chalk)}
-.why{margin-top:16px;padding:11px 12px;border-left:3px solid var(--lane);background:#0B142A;border-radius:0 8px 8px 0;
+.why{margin-top:14px;padding:10px 12px;border-left:3px solid var(--lane);background:#0B142A;border-radius:0 8px 8px 0;
   font-size:13.5px;color:var(--dim);line-height:1.5}
 .why b{color:var(--chalk);font-weight:600}
+.cite{margin-top:8px;font-size:11.5px;color:var(--dimmer);font-family:var(--data);line-height:1.5}
 .warm summary{list-style:none;cursor:pointer;font-family:var(--display);font-size:12px;font-weight:800;
-  letter-spacing:.17em;color:var(--dim);padding:8px 0;border-bottom:1px solid var(--line)}
+  letter-spacing:.16em;color:var(--dim);padding:8px 0;border-bottom:1px solid var(--line)}
 .warm summary::-webkit-details-marker{display:none}
 .warm summary::after{content:'＋';float:right;color:var(--dimmer)}
 .warm[open] summary::after{content:'−'}
-.warm ul{margin:9px 0 0;padding-left:18px;color:var(--dim);font-size:13.5px;line-height:1.6}
-.warm li::marker{color:var(--dimmer)}
+.warm ul{margin:8px 0 0;padding-left:18px;color:var(--dim);font-size:13.5px;line-height:1.6}
 
-/* ---------- setup form ---------- */
-.setup{padding-top:26px}
-.setup h2{font-size:30px;font-weight:800;letter-spacing:.02em;line-height:1.05;margin-bottom:6px}
-.setup .sub{color:var(--dim);font-size:15px;margin-bottom:26px;line-height:1.5}
-.field{margin-bottom:22px}
-.field > label{display:block;font-family:var(--display);font-size:12.5px;font-weight:800;letter-spacing:.16em;
+/* ---------- setup ---------- */
+.setup{padding-top:22px}
+.setup .hero2{display:block;margin:0 auto 4px;width:120px;opacity:.85}
+.setup h2{font-size:30px;font-weight:800;line-height:1.05;margin-bottom:6px}
+.setup .sub{color:var(--dim);font-size:15px;margin-bottom:24px;line-height:1.5}
+.field{margin-bottom:20px}
+.field>label{display:block;font-family:var(--display);font-size:12.5px;font-weight:800;letter-spacing:.15em;
   color:var(--dim);margin-bottom:8px}
 input[type=date],input[type=text]{width:100%;background:var(--ink2);border:1px solid var(--line);color:var(--chalk);
   border-radius:12px;padding:14px;font-family:var(--data);font-size:16px;min-height:52px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1px solid var(--line);background:var(--ink2);color:var(--dim);border-radius:11px;
-  padding:11px 14px;font-size:14.5px;font-weight:500;min-height:46px}
+.chip{border:1px solid var(--line);background:var(--ink2);color:var(--dim);border-radius:11px;padding:11px 14px;
+  font-size:14.5px;font-weight:500;min-height:46px}
 .chip.on{background:var(--chalk);color:var(--ink);border-color:var(--chalk);font-weight:600}
 .chip small{display:block;font-size:11.5px;opacity:.7;font-weight:400}
+.hint{color:var(--dimmer);font-size:12.5px;margin:9px 0 0;line-height:1.5}
 .cta{width:100%;background:var(--gold);color:#180F00;font-family:var(--display);font-weight:800;font-size:20px;
-  letter-spacing:.09em;padding:17px;border-radius:13px;margin-top:8px;min-height:58px}
+  letter-spacing:.09em;padding:17px;border-radius:13px;margin-top:6px;min-height:58px}
 .cta:active{transform:translateY(1px)}
 .ghost{width:100%;background:transparent;border:1px solid var(--line);color:var(--dim);border-radius:12px;
   padding:13px;font-size:14px;margin-top:10px;min-height:48px}
-.toolbar{display:flex;gap:8px;margin-top:20px}
+.toolbar{display:flex;gap:8px;margin-top:18px}
 .toolbar button{flex:1;background:var(--ink2);border:1px solid var(--line);color:var(--dim);border-radius:12px;
   padding:13px 8px;font-size:13.5px;min-height:48px}
-.toolbar button:active{background:var(--ink3)}
-.note{margin-top:22px;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#0A1020;
+.note{margin-top:20px;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#0A1020;
   color:var(--dimmer);font-size:12.5px;line-height:1.55}
 .note b{color:var(--dim)}
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:var(--chalk);
-  color:var(--ink);padding:11px 18px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;
-  transition:.25s;z-index:50;pointer-events:none}
+  color:var(--ink);padding:11px 18px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;transition:.25s;z-index:50}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 
-<!-- ============ SETUP ============ -->
 <main id="setup" class="wrap setup hidden">
-  <div class="brand" style="margin-bottom:22px">
-    <span class="mark">4</span><b>LANE 4</b><span>Sprint Week</span>
-  </div>
-  <h2>When do you race?</h2>
-  <p class="sub">Put in your next meet. You get the whole week — track work and gym work — built backward from that date.</p>
+  <svg class="hero2" viewBox="0 0 100 120" fill="none" aria-hidden="true">
+    <g stroke="#FFC53D" stroke-width="8" stroke-linecap="round">
+      <circle cx="66" cy="16" r="8" fill="#FFC53D" stroke="none"/>
+      <path d="M62 28 L46 58"/><path d="M46 58 L66 62 L70 42"/><path d="M46 58 L32 80 L22 100"/>
+      <path d="M60 33 L76 40 L80 25"/><path d="M60 33 L44 41 L40 55"/>
+    </g>
+  </svg>
+  <h2>When's your next meet?</h2>
+  <p class="sub">Put the date in. You'll get the whole week — track and weight room — worked backward from it.</p>
 
-  <div class="field">
-    <label for="f-date">Next meet date</label>
-    <input type="date" id="f-date">
-  </div>
+  <div class="field"><label for="f-date">Meet date</label><input type="date" id="f-date"></div>
+  <div class="field"><label for="f-name">Meet name <span style="opacity:.6">(optional)</span></label>
+    <input type="text" id="f-name" placeholder="League Champs" autocomplete="off"></div>
 
-  <div class="field">
-    <label for="f-name">Meet name <span style="opacity:.6">(optional)</span></label>
-    <input type="text" id="f-name" placeholder="League Championships" autocomplete="off">
-  </div>
-
-  <div class="field">
-    <label>Main event</label>
+  <div class="field"><label>Main event</label>
     <div class="chips" id="f-event">
       <button class="chip" data-v="short">60 / 100</button>
       <button class="chip" data-v="long">200</button>
       <button class="chip" data-v="quarter">400</button>
-      <button class="chip" data-v="all">60–400<small>full range</small></button>
-    </div>
-  </div>
+      <button class="chip" data-v="all">60–400<small>all of them</small></button>
+    </div></div>
 
-  <div class="field">
-    <label>Years of sprint training</label>
-    <div class="chips" id="f-level">
-      <button class="chip" data-v="first">1st year<small>lighter volume</small></button>
-      <button class="chip" data-v="dev">2nd–3rd<small>building up</small></button>
-      <button class="chip" data-v="exp">4+ years<small>full volume</small></button>
-    </div>
-  </div>
-
-  <div class="field">
-    <label>Times <span style="opacity:.6">(optional, but worth it)</span></label>
+  <div class="field"><label>Your times <span style="opacity:.6">(optional)</span></label>
     <div style="display:flex;gap:8px">
-      <div style="flex:1"><input type="text" id="f-h" placeholder="100m" inputmode="decimal" autocomplete="off"></div>
-      <div style="flex:1"><input type="text" id="f-t" placeholder="200m" inputmode="decimal" autocomplete="off"></div>
-      <div style="flex:1"><input type="text" id="f-q" placeholder="400m goal" inputmode="decimal" autocomplete="off"></div>
+      <input type="text" id="f-h" placeholder="100" inputmode="decimal" autocomplete="off">
+      <input type="text" id="f-t" placeholder="200" inputmode="decimal" autocomplete="off">
+      <input type="text" id="f-q" placeholder="400 goal" inputmode="decimal" autocomplete="off">
     </div>
-    <p style="color:var(--dimmer);font-size:12.5px;margin:9px 0 0;line-height:1.5">
-      Enter as <span class="num">11.94</span> or <span class="num">1:00.4</span>. Fill in what you have — every
-      session then prints a real target time instead of &ldquo;at 90%&rdquo;.</p>
-  </div>
+    <p class="hint">Like <span class="num">11.94</span> or <span class="num">1:00.4</span>. Add what you've got and
+      every rep gets a real target time instead of "90%".</p></div>
 
-  <div class="field">
-    <label>Days you take off</label>
+  <div class="field"><label>Years training</label>
+    <div class="chips" id="f-level">
+      <button class="chip" data-v="first">1st<small>lighter</small></button>
+      <button class="chip" data-v="dev">2nd–3rd</button>
+      <button class="chip" data-v="exp">4+<small>full volume</small></button>
+    </div></div>
+
+  <div class="field"><label>What's near you</label>
+    <div class="chips" id="f-terrain">
+      <button class="chip" data-v="track">Just a track</button>
+      <button class="chip" data-v="hills">Hills</button>
+      <button class="chip" data-v="sand">Sand dunes</button>
+      <button class="chip" data-v="both">Hills + sand</button>
+    </div>
+    <p class="hint">Hills and sand get rotated in so it's not the same session every week.</p></div>
+
+  <div class="field"><label>Days off</label>
     <div class="chips" id="f-rest">
       <button class="chip" data-v="0">Mon</button><button class="chip" data-v="1">Tue</button>
       <button class="chip" data-v="2">Wed</button><button class="chip" data-v="3">Thu</button>
       <button class="chip" data-v="4">Fri</button><button class="chip" data-v="5">Sat</button>
       <button class="chip" data-v="6">Sun</button>
     </div>
-    <p id="rest-hint" style="color:var(--dimmer);font-size:12.5px;margin:9px 0 0;line-height:1.5">
-      Tap to toggle. Everything else gets built around them.</p>
-  </div>
+    <p class="hint" id="rest-hint">Tap to pick. The week gets built around them.</p></div>
 
   <button class="cta" id="go">Build my week</button>
   <button class="ghost hidden" id="cancel">Cancel</button>
 
-  <div class="note">
-    <b>Read this first.</b> This is a planning tool, not your coach. Your actual coach's plan wins every time.
-    Sharp pain is a stop sign — rest it and get it looked at. Sore and heavy is different from hurt.
-  </div>
+  <div class="note"><b>Quick heads-up.</b> This is a plan, not a coach. If your coach says something different,
+    do what your coach says. Sore is fine. Sharp pain isn't — stop and get it looked at.</div>
 </main>
 
-<!-- ============ APP ============ -->
 <div id="app" class="hidden">
   <header class="hdr">
     <svg class="lanes" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
       <g stroke="#7FA8FF" stroke-width="1" fill="none">
         <path d="M-20 200 Q 90 -30 210 200"/><path d="M20 200 Q 130 -30 250 200"/>
         <path d="M60 200 Q 170 -30 290 200"/><path d="M100 200 Q 210 -30 330 200"/>
-        <path d="M140 200 Q 250 -30 370 200"/><path d="M180 200 Q 290 -30 410 200"/>
-      </g>
+        <path d="M140 200 Q 250 -30 370 200"/><path d="M180 200 Q 290 -30 410 200"/></g>
+    </svg>
+    <svg class="hero" viewBox="0 0 100 120" fill="none" aria-hidden="true">
+      <g stroke="#FFC53D" stroke-width="8" stroke-linecap="round">
+        <circle cx="66" cy="16" r="8" fill="#FFC53D" stroke="none"/>
+        <path d="M62 28 L46 58"/><path d="M46 58 L66 62 L70 42"/><path d="M46 58 L32 80 L22 100"/>
+        <path d="M60 33 L76 40 L80 25"/><path d="M60 33 L44 41 L40 55"/></g>
     </svg>
     <div class="inner">
-      <div class="brand"><span class="mark">4</span><b>LANE 4</b><span id="h-meet">Sprint Week</span></div>
-      <div class="eyebrow" id="h-eyebrow">Days until race day</div>
-      <div class="countdown">
-        <span class="big num" id="h-days">0</span>
-        <span class="unit" id="h-unit">DAYS<small id="h-date">—</small></span>
-      </div>
+      <div class="brand"><span class="mark">4</span><b>LANE 4</b><span id="h-meet"></span></div>
+      <div class="eyebrow" id="h-eyebrow">Days to race day</div>
+      <div class="countdown"><span class="big num" id="h-days">0</span>
+        <span class="unit" id="h-unit">DAYS<small id="h-date">—</small></span></div>
       <div class="phaseline" id="h-pills"></div>
     </div>
   </header>
@@ -262,418 +249,325 @@ input[type=date],input[type=text]{width:100%;background:var(--ink2);border:1px s
       <div class="lbl"><b id="w-label">This week</b><span id="w-range">—</span></div>
       <button class="arrow" id="next" aria-label="Next week">›</button>
     </nav>
-
     <div class="lane-list" id="lanes"></div>
-
     <div class="toolbar">
-      <button id="copy">Copy week as text</button>
-      <button id="edit">Change meet</button>
+      <button id="copy">Copy week</button><button id="edit">Change meet</button>
     </div>
-
-    <div class="note">
-      <b>How to read this.</b> <span style="color:var(--torch)">HIGH</span> days are all-out — sprints, jumps, heavy or fast lifting.
-      <span style="color:var(--cool)">LOW</span> days stay genuinely easy (65–75%), because that's what makes the high days possible.
-      Never two hard days back to back.
-      <br><br><b><span style="color:var(--amber)">MED</span> days are the one exception</b> — intensive tempo at 80–85%,
-      which exists because the 400 is about 70% lactic and a pure high–low week never trains that system.
-      On any hard day, keep walking through the rests. Moving clears lactate roughly twice as fast as sitting down.
-      <br><br><b>The week's shape.</b> You pick the days off; the week is built around them. Three lift days land on
-      your hard days, moving 8–12 reps → 5–7 → 3–5 across the week. Jumps go on the first hard day.
-      <br><br><b>Racing most weekends?</b> Change the meet date to your next race each time you finish one — the last
-      seven days before any date you enter get the full taper.
-    </div>
+    <div class="note"><b>How this works.</b>
+      <span style="color:var(--torch)">HIGH</span> means all-out.
+      <span style="color:var(--cool)">LOW</span> means actually easy — that's what lets the hard days be hard.
+      <span style="color:var(--amber)">MED</span> shows up once every three weeks for the 400.
+      Never two hard days in a row. Racing every weekend? Just update the meet date each time.</div>
   </main>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-/* ================= storage (falls back to memory if blocked) ================= */
-const store = (()=>{ let mem={};
-  try{ const k='__t'; localStorage.setItem(k,'1'); localStorage.removeItem(k);
-    return {get:k=>localStorage.getItem(k), set:(k,v)=>localStorage.setItem(k,v)};
-  }catch(e){ return {get:k=>mem[k]??null, set:(k,v)=>{mem[k]=v}}; }
-})();
+/* ================= storage ================= */
+const store=(()=>{let mem={};try{const k='__t';localStorage.setItem(k,'1');localStorage.removeItem(k);
+  return{get:k=>localStorage.getItem(k),set:(k,v)=>localStorage.setItem(k,v)};}
+  catch(e){return{get:k=>mem[k]??null,set:(k,v)=>{mem[k]=v}};}})();
 
 /* ================= dates ================= */
 const DAYNAMES=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-const SHORTMON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const DAY=86400000;
 function parseISO(s){const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c);}
 function midnight(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate());}
 function addDays(d,n){return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);}
 function diffDays(a,b){return Math.round((midnight(a)-midnight(b))/DAY);}
-function mondayOf(d){const x=midnight(d);const w=(x.getDay()+6)%7;return addDays(x,-w);}
-function fmt(d){return SHORTMON[d.getMonth()]+' '+d.getDate();}
-function fmtLong(d){return DAYNAMES[(d.getDay()+6)%7].slice(0,3)+' '+SHORTMON[d.getMonth()]+' '+d.getDate();}
+function mondayOf(d){const x=midnight(d);return addDays(x,-((x.getDay()+6)%7));}
+function fmt(d){return MON[d.getMonth()]+' '+d.getDate();}
+function fmtLong(d){return DAYNAMES[(d.getDay()+6)%7].slice(0,3)+' '+MON[d.getMonth()]+' '+d.getDate();}
 
 /* ================= config ================= */
-const LEVELS={first:{k:.70,label:'1st year'},dev:{k:.86,label:'2nd–3rd year'},exp:{k:1,label:'4+ years'}};
+const LEVELS={first:{k:.70},dev:{k:.86},exp:{k:1}};
 const EVENTS={short:'60 / 100m',long:'200m',quarter:'400m',all:'60–400m'};
-/* The third quality day rotates on the 3-week cycle so every energy system gets
-   touched without any single week carrying two lactic sessions.
-   Introduce = speed endurance · Stabilize = the heavy lactic day · Unload = buffering work. */
-const ROTATION={
-  short:{  gpp:['spd_end_short','hill200','spd_end_short'], spp:['spd_end_short','speed_end','spd_end_short'],
-           precomp:['spd_end_short','speed_end','spd_end_short'], comp:['spd_end_short','spd_end_short','spd_end_short']},
-  long:{   gpp:['spd_end_short','hill200','int_tempo'],     spp:['speed_end','special_end','spd_end_short'],
-           precomp:['speed_end','special_end','spd_end_short'], comp:['speed_end','spd_end_short','spd_end_short']},
-  quarter:{gpp:['speed_end','hill200','int_tempo'],         spp:['se400','se400','int_tempo'],
-           precomp:['se400','split400','spd_end_short'],     comp:['speed_end','spd_end_short','spd_end_short']},
-  all:{    gpp:['spd_end_short','hill200','int_tempo'],      spp:['speed_end','se400','int_tempo'],
-           precomp:['speed_end','split400','spd_end_short'], comp:['speed_end','spd_end_short','spd_end_short']}
-};
-const CYCIDX={Introduce:0,Stabilize:1,Unload:2};
-
-/* ---- target paces ----
-   Derived from whatever times you give it. Ratios are the standard sprint
-   relationships: a 150 is ~0.745 of an open 200, an 80 is ~0.83 of a 100, and the
-   first 300 of a 400 is ~0.715 of the full race. A rep "at 90%" then simply means
-   that best divided by 0.90. */
-function parseT(s){
-  if(!s)return 0; s=(''+s).trim(); if(!s)return 0;
-  if(s.indexOf(':')>=0){const p=s.split(':');return (+p[0])*60+(+p[1]||0);}
-  return +s||0;
-}
-function fmtT(x){
-  if(!x||!isFinite(x))return null;
-  if(x<60)return x.toFixed(1);
-  const m=Math.floor(x/60),s=x-m*60;
-  return m+':'+(s<10?'0':'')+s.toFixed(1);
-}
-function TARGETS(cfg){
-  const p=cfg.pr||{};
-  let h=parseT(p.h),t=parseT(p.t),q=parseT(p.q);
-  if(!t&&h) t=h*2+1.0;                 // open 200 from a 100
-  if(!h&&t) h=(t-1.0)/2;
-  if(!q&&t) q=t*2+4.0;                 // a well-trained 400 off the 200
-  if(!t&&!q) return null;
-  return {
-    m80:  h?fmtT((h*0.83)/0.95):null,        // 80m rep at 95%
-    m150: t?fmtT((t*0.745)/0.95):null,       // 150m rep at 95%
-    m200: t?fmtT(t/0.95):null,               // 200m rep at 95%
-    m300: q?fmtT((q*0.715)/0.90):null,       // 300m rep at 90%
-    it:   t?fmtT(t/0.82):null,               // intensive tempo 200 at ~82%
-    s1:   q?fmtT(q/2-1.3):null,              // race model: first 200
-    s2:   q?fmtT(q/2+1.3):null,              // race model: second 200
-    goal: q?fmtT(q):null
-  };
-}
-function tgt(v,label){return v?' — target '+(label||'')+v:'';}
 const CYCLE=[{n:'Introduce',m:.80},{n:'Stabilize',m:1.00},{n:'Unload',m:.60}];
-/* q = the quality days in order. The middle one is the lift-led day.
-   Everything else in the week is filled in around whichever days you train. */
 const PHASES={
   gpp:{name:'Off-season',q:['accel_bound','lift_led','maxv'],tempo:'tempo_ext'},
   spp:{name:'Pre-season',q:['maxv','lift_led','speed_end'],tempo:'tempo_ext'},
   precomp:{name:'Sharpening',q:['maxv','lift_led','speed_end'],tempo:'tempo_mid'},
   comp:{name:'Race season',q:['maxv','accel_blocks'],tempo:'tempo_light'}
 };
-function phaseFor(weeksOut){
-  if(weeksOut>16)return'gpp'; if(weeksOut>10)return'spp'; if(weeksOut>4)return'precomp'; return'comp';
-}
-/* race-week template, keyed by days BEFORE the meet */
+function phaseFor(w){return w>16?'gpp':w>10?'spp':w>4?'precomp':'comp';}
+const ROTATION={
+  short:{  gpp:['spd_end_short','hill200','spd_end_short'], spp:['spd_end_short','speed_end','spd_end_short'],
+           precomp:['spd_end_short','speed_end','spd_end_short'], comp:['spd_end_short','spd_end_short','spd_end_short']},
+  long:{   gpp:['spd_end_short','hill200','int_tempo'],     spp:['speed_end','special_end','spd_end_short'],
+           precomp:['speed_end','special_end','spd_end_short'], comp:['speed_end','spd_end_short','spd_end_short']},
+  quarter:{gpp:['speed_end','hill200','int_tempo'],         spp:['se400','se400','int_tempo'],
+           precomp:['se400','split400','spd_end_short'],    comp:['speed_end','spd_end_short','spd_end_short']},
+  all:{    gpp:['spd_end_short','hill200','int_tempo'],     spp:['speed_end','se400','int_tempo'],
+           precomp:['speed_end','split400','spd_end_short'],comp:['speed_end','spd_end_short','spd_end_short']}
+};
+const CYCIDX={Introduce:0,Stabilize:1,Unload:2};
 const RACEWEEK={0:'race',1:'pre_meet',2:'shakeout',3:'speed_short',4:'tempo_light',5:'main_high',6:'off'};
 const AFTERMEET={1:'off',2:'recovery',3:'tempo_light'};
 
-/* ================= session library ================= */
-function sc(base,c){return Math.max(2,Math.min(base+1,Math.round(base*c.mult*c.k)));}
-function gs(base,c){const p={gpp:1,spp:1,precomp:.85,comp:.6}[c.phase];
-  return Math.max(2,Math.min(base,Math.round(base*p*(.6+.4*c.mult))));}
-function I(k,v,s,rest){return{k,v,s,rest};}
-function m(reps,dist){return reps*dist;}
-
-/* ---- Olympic-lift family, gated by training age.
-       No catching a bar until a coach has signed off on the pull. ---- */
-function OLY(slot,level){
-  const T={
-    first:{
-      A:['Clean-grip shrug + mid-thigh pull',4,'3','PVC or empty bar until it looks right. Bar stays close, shrug hard, arms stay long.'],
-      B:['Clean-grip high pull',5,'3','Elbows high and outside. This is the whole clean minus the catch.'],
-      C:['Jump shrug',4,'3','Light bar. Leave the ground, land soft. Speed is the point.']},
-    dev:{
-      A:['Mid-thigh pull',4,'3','Heavier than you could clean. Violent hip extension.'],
-      B:['Hang power clean from the knee',5,'3','Catch in a quarter squat, elbows through fast.'],
-      C:['Power clean from blocks',5,'3','Full reset every rep. Stop the set when bar speed drops.']},
-    exp:{
-      A:['Mid-thigh pull',4,'3','Load it up — this is the force builder.'],
-      B:['Hang power clean',5,'3','Fast under the bar. Feet land, elbows whip.'],
-      C:['Power clean',5,'3','Reset every rep. The moment it slows down, the set is over.']}
-  };
-  return T[level][slot];
+/* ================= target paces ================= */
+function parseT(s){if(!s)return 0;s=(''+s).trim();if(!s)return 0;
+  if(s.indexOf(':')>=0){const p=s.split(':');return(+p[0])*60+(+p[1]||0);}return +s||0;}
+function fmtT(x){if(!x||!isFinite(x))return null;if(x<60)return x.toFixed(1);
+  const m=Math.floor(x/60),s=x-m*60;return m+':'+(s<10?'0':'')+s.toFixed(1);}
+function TARGETS(cfg){
+  const p=cfg.pr||{};let h=parseT(p.h),t=parseT(p.t),q=parseT(p.q);
+  if(!t&&h)t=h*2+1.0; if(!h&&t)h=(t-1.0)/2; if(!q&&t)q=t*2+4.0;
+  if(!t&&!q)return null;
+  return{m80:h?fmtT((h*0.83)/0.95):null, m150:t?fmtT((t*0.745)/0.95):null,
+         m200:t?fmtT(t/0.95):null, m300:q?fmtT((q*0.715)/0.90):null, it:t?fmtT(t/0.82):null,
+         s1:q?fmtT(q/2-1.3):null, s2:q?fmtT(q/2+1.3):null, goal:q?fmtT(q):null};
 }
-/* ---- the M / W / F wave: 8–12 → 5–7 → 3–5.
-       Olympic derivatives stay at 3 reps every day — nobody cleans for ten. ---- */
+function tgt(v,p){return v?' — aim for '+(p||'')+v:'';}
+
+/* ================= gym ================= */
 const LIFT={
-  A:{title:'Day A — strength & tissue · 8–12 reps',rows:c=>[
-    OLY('A',c.level),
-    ['Back squat',4,'10','~70%. Controlled down, fast up.'],
-    ['Romanian deadlift',3,'10','Hamstrings, not low back.'],
-    ['Incline dumbbell press',3,'10',''],
-    ['Single-arm dumbbell row',3,'12',''],
-    ['Copenhagen plank',3,'20s each','Groin insurance.']]},
-  B:{title:'Day B — strength · 5–7 reps',rows:c=>[
-    OLY('B',c.level),
-    ['Front squat',4,'6','Elbows up. This is the position that makes a clean catch possible.'],
-    ['Stiff-leg deadlift',3,'6','Bar close, back flat.'],
-    ['Push press',4,'6','Dip, drive, punch.'],
-    ['Chin-up',3,'6','Add weight once 6 feels easy.']]},
-  C:{title:'Day C — power · 3–5 reps, everything fast',rows:c=>[
-    OLY('C',c.level),
-    ['Quarter squat',4,'4','Heavy, short range, explode out.'],
-    ['Weighted jump squat',4,'3','Light load, maximum height.'],
-    ['Push jerk',4,'3','Fast feet under the bar.'],
-    ['Nordic hamstring curl',3,'5','Non-negotiable. This is what keeps you racing.']]}
+  A:{title:'Day A · 8–12 reps',rows:c=>[
+    ['Back squat',4,'10','About 70%. Down slow, up fast.'],
+    ['Romanian deadlift',3,'10','Should feel it in the hamstrings, not the low back.'],
+    ['Bench or incline dumbbell press',3,'10',''],
+    ['Pull-up or lat pulldown',3,'8','Add weight when 8 gets easy.'],
+    ['Walking lunge',3,'10 each','Long step, stay tall.'],
+    ['Plank',3,'30s','']]},
+  B:{title:'Day B · 5–7 reps',rows:c=>[
+    ['Front squat or trap-bar deadlift',4,'6','Heavier. Keep the bar moving at the same speed.'],
+    ['Single-leg Romanian deadlift',3,'6 each','Slow down, controlled up.'],
+    ['Incline dumbbell press',3,'6',''],
+    ['Weighted pull-up or heavy row',3,'6',''],
+    ['Bulgarian split squat',3,'6 each','Back foot up on a bench.']]},
+  C:{title:'Day C · 3–5 reps, all fast',rows:c=>[
+    ['Trap-bar jump squat',4,'4','Light. Leave the ground, land soft.'],
+    ['Kettlebell swing',4,'6','Snap the hips. Same job a power clean does, way easier to learn.'],
+    ['Push press',4,'3','Dip, drive, punch it up.'],
+    ['Box jump',3,'3','Step down every time. Never jump down.'],
+    ['Standing broad jump',3,'3','Measure it. Full send.']]}
 };
-/* ---- jumps live on the track, Schexnayder progression across the year ---- */
 const BOUND={
-  gpp:['Jumps — in place & short response','Pogo hops 3 × 10 · tuck jumps 3 × 8 · box jump 4 × 4 (step down, never jump down) · standing long jump × 5. Land quiet — noise means you\u2019re absorbing it wrong.'],
-  spp:['Bounding — short','Alternate-leg bounds 4 × 20m · single-leg hops 2 × 15m each leg · low hurdle hops 4 × 5.'],
-  precomp:['Bounding — extended','Speed bounds 4 × 30m · alternate bounds 2 × 30m · standing triple jump × 4. Measure it. Stop when distance drops off.'],
-  comp:['Bounding — light','Speed bounds 2 × 20m · standing long jump × 3. Sharpness only.']
+  gpp:['Jumps','Pogo hops 3 × 10 · tuck jumps 3 × 8 · line hops 2 × 20. Land quiet.'],
+  spp:['Bounding','Alternate bounds 4 × 20m · single-leg hops 2 × 15m each · low hurdle hops 4 × 5.'],
+  precomp:['Bounding','Speed bounds 4 × 30m · standing triple jump × 4. Measure it, stop when it drops off.'],
+  comp:['Bounding','Speed bounds 2 × 20m · broad jump × 3. Just staying sharp.']
 };
-const GSCIRCUIT=['General strength circuit','3 rounds, no rush: 10 walking lunges each · 12 push-ups · 15 prisoner squats · 10 rocket jumps (low effort) · 30s plank · 15 glute bridges.'];
-const MEDLOW=['Med ball & mobility','Med ball 200-series at easy intent · hurdle over-unders 2 × 6 · 8 min stretching.'];
-const THROWS=['Medicine ball throws','Overhead-back × 5 · between-legs forward × 5 · chest pass × 5. Full effort, long rest — power work, not conditioning.'];
+const CIRCUIT=['Circuit','3 rounds: 10 lunges each · 12 push-ups · 15 squats · 10 rocket jumps · 30s plank · 15 glute bridges.'];
+const MEDLOW=['Med ball + mobility','Med ball throws easy · hurdle over-unders 2 × 6 · 8 min stretching.'];
+const THROWS=['Med ball throws','Overhead-back × 5 · between-legs × 5 · chest pass × 5. Hard throws, long rest.'];
+const WARM_FULL=['Warm-up · 15 min',['400m jog','Hip circuit: leg swings, walking lunge + twist, glute bridges',
+  'Ankling · A-march · A-skip, 2 × 20m each','Dribbles + straight-leg bounds, 2 × 20m',
+  '3–4 × 30m build-ups, last one about 90%','Spikes on. Sit 2 min. Go.']];
+const WARM_SHORT=['Warm-up · 10 min',['600m easy jog','Hip circuit','Ankling + A-skip 2 × 20m','2 × 30m relaxed strides']];
 
-const WARM_FULL=['Full warm-up — 15–20 min',[
-  '400m easy jog or 3 min skipping rope',
-  'Hip circuit: leg swings, walking lunge + twist, spiderman, glute bridges (5 min)',
-  'Ankling 2 × 20m · A-march 2 × 20m · A-skip 2 × 20m',
-  'Dribbles low/mid 2 × 20m · straight-leg bounds 2 × 20m',
-  '3–4 × 30m build-ups, last one to about 90%',
-  'Spikes on. Sit for 2 min. Then start the session.']];
-const WARM_SHORT=['Easy warm-up — 10 min',[
-  '600m easy jog','Hip circuit (4 min)','Ankling and A-skip, 2 × 20m each','2 × 30m relaxed strides']];
-
+/* ================= sessions =================
+   "guide" = published session-volume range, Sports Medicine review of elite
+   sprint training (Table 2). Displayed so you can see the numbers are real. */
+function sc(b,c){return Math.max(2,Math.min(b+1,Math.round(b*c.mult*c.k)));}
+function gs(b,c){const p={gpp:1,spp:1,precomp:.85,comp:.6}[c.phase];
+  return Math.max(2,Math.min(b,Math.round(b*p*(.6+.4*c.mult))));}
+function I(k,v,s,rest){return{k,v,s,rest};}
+function m(r,d){return r*d;}
 const D={};
 
 D.accel_bound=c=>{const h=sc(6,c),f=sc(4,c),t=sc(2,c);return{
-  title:'Acceleration & bounding',tag:'HIGH',warm:WARM_FULL,
-  track:[I('HILL',h+' × 20m hill sprint','All-out up a 5–8° grade. Walk down slowly — that IS the rest.','rest 3–4 min'),
-         I('FLAT',f+' × 20m from a 3-point start','Push the ground back. Stay low longer than feels natural.','rest 3 min'),
-         I('TOUCH',t+' × flying 10m off a 25m build','Two seconds of top speed so you never lose the habit.','rest 5 min')],
-  extra:[THROWS],
-  vol:m(h,20)+m(f,20)+m(t,35),mins:90,
-  why:'The off-season high-neural day: push mechanics on the hill, a short reminder of top speed, then jumps. The bounding is on the track on purpose — it belongs with sprinting, not tacked on in the weight room.'};};
+  title:'Hills + bounding',tag:'HIGH',warm:WARM_FULL,guide:'accel 100–300m',
+  track:[I('HILL',h+' × 20m hill','Full send up. Walk back down — that\u2019s your rest.','rest 3–4 min'),
+    I('FLAT',f+' × 20m, 3-point start','Push the ground behind you. Stay low longer than feels normal.','rest 3 min'),
+    I('TOUCH',t+' × flying 10m','Off a 25m build-up. Two seconds of top speed so you don\u2019t lose it.','rest 5 min')],
+  extra:[THROWS],vol:m(h,20)+m(f,20)+m(t,35),mins:85,
+  why:'Hills make you push harder but cap how fast you can go, so your hamstrings stay safe. Best acceleration work there is.'};};
 
-D.maxv=c=>{const w=sc(4,c),sfs=sc(2,c),fly=sc(3,c);return{
-  title:'Max velocity',tag:'HIGH',warm:WARM_FULL,
-  track:[I('WICKETS',w+' × wicket run','Mini-hurdles about 6.5–7.5 ft apart. Run tall, strike down, don\u2019t reach.','rest 3 min'),
-         I('SFS',sfs+' × 20-20-20 sprint-float-sprint','Accelerate 20m, relax and hold 20m, re-accelerate 20m.','rest 6 min'),
-         I('FLY',fly+' × flying 20m','30m build into a timed 20m. Time them. Write them down.','rest 6–8 min FULL')],
-  vol:m(w,30)+m(sfs,60)+m(fly,50),mins:90,
-  why:'Top speed is the biggest lever in the 100 and 200, and it only moves when you\u2019re fresh. If the times drift slower rep to rep the session is finished — walk away.'};};
+D.sand_dunes=c=>{const d=sc(6,c),f=sc(3,c);return{
+  title:'Sand dunes',tag:'HIGH',warm:WARM_FULL,guide:'accel 100–300m',
+  track:[I('DUNE',d+' × 15–25m up the dune','All out. Sand is slow and soft, so you can go hard without beating your legs up.','walk down · rest 3–4 min'),
+    I('FLAT',f+' × 20m on hard ground','Right after. Notice how easy flat feels now.','rest 3 min')],
+  extra:[THROWS],vol:m(d,20)+m(f,20),mins:80,
+  why:'Sand makes every stride harder and every landing softer. Percy Cerutty ran his whole off-season on dunes and it worked.'};};
 
-D.lift_led=c=>{const a=sc(4,c),blocks=(c.phase==='precomp'||c.phase==='comp');return{
-  title:'Technical work & lift',tag:'HIGH',warm:WARM_FULL,
-  track:[I('DRILLS','Wickets 2 runs · dribbles 4 × 20m','Shapes, not effort. Ten minutes.',''),
-         I('ACCEL',a+' × 20m from '+(blocks?'blocks':'a 3-point start'),'Full effort but short. You\u2019re rehearsing the start, not training endurance.','rest 3 min')],
-  vol:m(a,20),mins:75,
-  why:'The weight room is the main event today — that\u2019s how the college programs use their middle session. The track portion stays under 100m so nothing competes with the lift.'};};
+D.maxv=c=>{const w=sc(3,c),s=sc(2,c),f=sc(3,c);return{
+  title:'Top speed',tag:'HIGH',warm:WARM_FULL,guide:'max velocity 50–150m',
+  track:[I('WICKETS',w+' × wicket run','Mini-hurdles ~6.5–7.5 ft apart. Run tall, strike down, don\u2019t reach.','rest 3 min'),
+    I('SFS',s+' × 20-20-20','Accelerate 20, relax and float 20, pick it back up 20.','rest 6 min'),
+    I('FLY',f+' × flying 20m','30m build-up into it. Time them. Write them down.','rest 6–8 min')],
+  vol:m(f,20)+m(s,40),mins:85,
+  why:'Top speed is basically the whole 100. It only goes up when you\u2019re fresh — times drop off, you\u2019re done for the day.'};};
 
-D.hill200=c=>{const dist=c.level==='first'?100:(c.level==='dev'?150:180),r=c.level==='first'?3:2;return{
-  title:'Uphill 200s',tag:'HIGH',warm:WARM_FULL,
-  track:[I('HILL',r+' × '+dist+'m uphill at 95%','Long steady grade, 3–5°. Even effort — no heroic first rep. This one hurts.','rest 12–15 min FULL'),
-         I('FINISH','2 × 30m relaxed strides','Then walk 5 minutes before you leave.','')],
-  vol:m(r,dist),mins:80,
-  why:'The D1 staple, scaled down. The grade caps your speed so the hamstrings stay safe while the effort stays maximal. Big cost — it runs once every three weeks here, and never inside two weeks of a meet.'};};
+D.lift_led=c=>{const a=sc(4,c),bl=(c.phase==='precomp'||c.phase==='comp');return{
+  title:'Technical + lift',tag:'HIGH',warm:WARM_FULL,guide:'—',
+  track:[I('DRILLS','Wickets × 2 · dribbles 4 × 20m','Shapes, not effort. Ten minutes.',''),
+    I('ACCEL',a+' × 20m from '+(bl?'blocks':'3-point'),'Full effort, short. Rehearsing the start.','rest 3 min')],
+  vol:m(a,20),mins:70,
+  why:'Weight room is the main thing today. Track part stays short so nothing competes with the lift.'};};
+
+D.hill200=c=>{const d=c.level==='first'?100:(c.level==='dev'?150:180),r=c.level==='first'?3:2;return{
+  title:'Uphill 200s',tag:'HIGH',warm:WARM_FULL,guide:'specific endurance 300–900m',
+  track:[I('HILL',r+' × '+d+'m uphill','Steady 3–5° grade. Even effort — don\u2019t blow the first one.','rest 12–15 min'),
+    I('FINISH','2 × 30m strides','Then walk 5 min before you leave.','')],
+  vol:m(r,d),mins:80,
+  why:'This one hurts. The hill caps your speed so it\u2019s safer than it feels. Runs once every three weeks, never near a meet.'};};
 
 D.accel_blocks=c=>{const t=sc(3,c),b=sc(4,c),l=sc(2,c);return{
-  title:'Blocks & acceleration',tag:'HIGH',warm:WARM_FULL,
-  track:[I('SETUP',t+' × 10m block start','Technique only. Identical setup every rep so the meet feels like practice.','rest 2–3 min'),
-         I('BLOCKS',b+' × 30m from blocks','Full effort. React to a real command or a clap.','rest 4–5 min'),
-         I('LONGER',l+' × 50m from blocks','Ride the acceleration out — don\u2019t pop upright early.','rest 6 min')],
-  extra:[THROWS],
-  vol:m(t,10)+m(b,30)+m(l,50),mins:85,
-  why:'The first 30m is the most rehearsable part of a race. Reps of the exact setup are worth more here than extra top-end work.'};};
+  title:'Blocks',tag:'HIGH',warm:WARM_FULL,guide:'accel 100–300m',
+  track:[I('SETUP',t+' × 10m out of blocks','Technique only. Same setup every single time.','rest 2–3 min'),
+    I('BLOCKS',b+' × 30m','Full effort. React to a clap or a real command.','rest 4–5 min'),
+    I('LONGER',l+' × 50m','Ride it out — don\u2019t stand up early.','rest 6 min')],
+  extra:[THROWS],vol:m(t,10)+m(b,30)+m(l,50),mins:80,
+  why:'First 30m is the most rehearsable part of any race. Reps of the exact setup beat extra speed work here.'};};
 
-D.speed_end=c=>{const dist=(c.event==='short')?120:150,r=sc(3,c);return{
-  title:'Speed endurance',tag:'HIGH',warm:WARM_FULL,
-  track:[I('MAIN',r+' × '+dist+'m at 95%+'+(c.T?tgt(dist===150?c.T.m150:c.T.m200):''),'The rep ends when the form ends. Hold the shapes all the way through.','rest 10–12 min FULL'),
-         I('FINISH','2 × 30m relaxed strides','Then walk 5 min before you leave.','')],
-  vol:m(r,dist),mins:80,
-  why:'The 200m engine. Long enough to run out of clean fuel, short enough that you\u2019re still sprinting rather than surviving. Full recovery between reps — this trains speed, not tiredness.'};};
+D.speed_end=c=>{const d=(c.event==='short')?120:150,r=sc(3,c);return{
+  title:'Speed endurance',tag:'HIGH',warm:WARM_FULL,guide:'specific endurance 300–900m',
+  track:[I('MAIN',r+' × '+d+'m'+(c.T?tgt(d===150?c.T.m150:c.T.m200):' at 95%+'),'The rep ends when your form ends.','rest 10–12 min'),
+    I('FINISH','2 × 30m strides','','')],
+  vol:m(r,d),mins:80,
+  why:'This is the 200. Long enough to run out of gas, short enough that you\u2019re still actually sprinting.'};};
 
 D.spd_end_short=c=>{const r=sc(4,c);return{
-  title:'Short speed endurance',tag:'HIGH',warm:WARM_FULL,
-  track:[I('MAIN',r+' × 80m at 95%+'+(c.T?tgt(c.T.m80):''),'Race-model running. Accelerate properly, then hold top speed as long as you can.','rest 8–10 min FULL'),
-         I('FINISH','2 × 30m relaxed strides','','')],
+  title:'Short speed endurance',tag:'HIGH',warm:WARM_FULL,guide:'specific endurance 300–900m',
+  track:[I('MAIN',r+' × 80m'+(c.T?tgt(c.T.m80):' at 95%+'),'Accelerate properly, then hold it to the line.','rest 8–10 min'),
+    I('FINISH','2 × 30m strides','','')],
   vol:m(r,80),mins:70,
-  why:'This is the 60 and 100 protected. Long enough to train holding speed to the line, short enough that no meaningful acidity builds up — so it doesn\u2019t eat into the week the way the 300s do.'};};
+  why:'Protects your 60 and 100. Teaches you to hold speed without wrecking the rest of your week.'};};
 
 D.special_end=c=>{const r=sc(3,c);return{
-  title:'Special endurance',tag:'HIGH',warm:WARM_FULL,
-  track:[I('MAIN',r+' × 200m at 95%'+(c.T?tgt(c.T.m200):''),'Huge rests. Every rep is a race — if the times slide, you\u2019re done.','rest 15–20 min FULL'),
-         I('WALK','Keep moving after each','Walk or jog easy for the first 5 min of every rest. Standing still clears lactate more slowly than moving does.','')],
+  title:'Special endurance',tag:'HIGH',warm:WARM_FULL,guide:'specific endurance 300–900m',
+  track:[I('MAIN',r+' × 200m'+(c.T?tgt(c.T.m200):' at 95%'),'Big rests. Every rep is a race.','rest 15–20 min'),
+    I('WALK','Keep moving in the rest','Walk the first 5 min. Standing still clears lactate slower.','')],
   vol:m(r,200),mins:90,
-  why:'200m race prep, and the bridge to the 400. Few reps, enormous rests — the moment the times fall off you\u2019ve stopped training speed and started training slow.'};};
+  why:'200 race prep and the bridge to the 400. Times slide, you\u2019re done — that\u2019s not training speed anymore.'};};
 
 D.se400=c=>{const r=sc(3,c);return{
-  title:'Special endurance — 300s',tag:'HIGH',warm:WARM_FULL,
-  track:[I('MAIN',r+' × 300m at 90%'+(c.T?tgt(c.T.m300):''),'Even effort, no heroic first rep. Aim to run all of them within a second of each other.','rest 12–15 min FULL'),
-         I('WALK','Active recovery between reps','Walk continuously for the first 5 min of each rest — moving clears lactate roughly twice as fast as sitting.','')],
+  title:'300s',tag:'HIGH',warm:WARM_FULL,guide:'specific endurance 300–900m',
+  track:[I('MAIN',r+' × 300m'+(c.T?tgt(c.T.m300):' at 90%'),'Even effort. Try to run them all within a second of each other.','rest 12–15 min'),
+    I('WALK','Walk the rests','First 5 min of every rest, keep moving. Clears about twice as fast as sitting.','')],
   vol:m(r,300),mins:95,
-  why:'The core 400m session: lactic power. It teaches the body to keep producing force while acidity climbs. This is the single hardest thing in the program — one a week, maximum, and never inside two weeks of a meet.'};};
+  why:'The 400 session. Teaches you to keep pushing while your legs fill up. Hardest thing in here — once a week, max.'};};
 
 D.split400=c=>({
-  title:'Split 400',tag:'HIGH',warm:WARM_FULL,
-  track:[I('MAIN','2 sets of 2 × 200m at race split pace'+(c.T&&c.T.s1?' — '+c.T.s1+' then '+c.T.s2:''),'Only 45 seconds between the two 200s inside a set. The second one will be slower — that is the race, rehearsed.','45s inside the set · 20 min between sets'),
-         I('WALK','Keep walking through the long rest','Do not sit down. Keep the legs moving for at least 5 min.','')],
+  title:'Split 400',tag:'HIGH',warm:WARM_FULL,guide:'specific endurance 300–900m',
+  track:[I('MAIN','2 sets of 2 × 200m'+(c.T&&c.T.s1?' — '+c.T.s1+' then '+c.T.s2:' at race pace'),
+    'Only 45 seconds between the two 200s. The second one is supposed to feel bad.','45s inside · 20 min between'),
+    I('WALK','Don\u2019t sit down','Keep walking through the long rest.','')],
   vol:800,mins:95,
-  why:'The most race-specific 400m workout there is — it rehearses exactly what the second half of the race feels like. Reserve it for the sharpening phase, when the base work is already done.'});
+  why:'Closest thing to actually racing a 400. Rehearses exactly what the back half feels like.'});
 
-D.int_tempo=c=>{const sets=2,reps=sc(4,c);return{
-  title:'Intensive tempo',tag:'MED',warm:WARM_FULL,
-  track:[I('MAIN',sets+' × '+reps+' × 200m at 80–85%'+(c.T?tgt(c.T.it,'around '):''),'Controlled and rhythmic. Not a sprint, but not easy either — you should feel it accumulating.','2 min between reps · 6 min between sets'),
-         I('FINISH','5 min easy jog','Never skip this. Active cool-down is what actually clears the lactate.','')],
-  extra:[MEDLOW],vol:0,tempo:sets*reps*200,mins:70,
-  why:'The buffering session. Faster than tempo, slower than racing, with short rests so acidity builds and the body learns to clear and tolerate it. This is the one middle-intensity day in the program, and it exists because the 400 is about 70% lactic — a pure high-low week never trains that system.'};};
+D.int_tempo=c=>{const s=2,r=sc(4,c);return{
+  title:'Intensive tempo',tag:'MED',warm:WARM_FULL,guide:'sub-max running 600–2000m',
+  track:[I('MAIN',s+' × '+r+' × 200m'+(c.T?tgt(c.T.it,'about '):' at 80–85%'),
+    'Not a sprint, not easy. You should feel it stacking up.','2 min between reps · 6 min between sets'),
+    I('JOG','5 min easy jog after','Don\u2019t skip it. This is what actually clears it.','')],
+  extra:[MEDLOW],vol:0,tempo:s*r*200,mins:70,
+  why:'The 400 is about 70% lactic. Only running all-out or super easy never trains that — this does.'};};
 
 D.speed_short=c=>({
-  title:'Sharpener',tag:'HIGH',warm:WARM_FULL,
+  title:'Sharpener',tag:'HIGH',warm:WARM_FULL,guide:'accel 100–300m',
   track:[I('ACCEL','4 × 20m from blocks','Crisp and fast. Rehearsing, not training.','rest 3 min'),
-         I('FLY','2 × flying 20m','Fast and relaxed, then walk away.','rest 6 min')],
-  vol:120,mins:50,
-  why:'Last real speed touch before the meet. Short enough to leave no fatigue, fast enough to keep the nervous system switched on.'});
+    I('FLY','2 × flying 20m','Fast and relaxed, then walk away.','rest 6 min')],
+  vol:120,mins:45,
+  why:'Last real speed touch before the meet. Short enough to leave zero fatigue.'});
 
 D.pre_meet=c=>({
-  title:'Pre-meet',tag:'LOW',warm:WARM_FULL,
-  track:[I('STRIDES','2 × 30m build-up','Rising to about 90%. Feel smooth.','rest 3 min'),
-         I('STARTS','2 × block start to 15m','Set the blocks exactly as you will tomorrow.','rest 3 min'),
-         I('DONE','Go home','Full warm-up, six fast seconds total, out. 35–40 min on your feet.','')],
+  title:'Pre-meet',tag:'LOW',warm:WARM_FULL,guide:'—',
+  track:[I('STRIDES','2 × 30m build-up','Up to about 90%. Should feel smooth.','rest 3 min'),
+    I('STARTS','2 × block start to 15m','Set the blocks exactly like tomorrow.','rest 3 min'),
+    I('DONE','Go home','Six fast seconds total. 40 minutes and out.','')],
   vol:90,mins:40,
-  why:'The work is already done. Today is the routine — same warm-up, same block setup — so tomorrow nothing is new.'});
+  why:'Work\u2019s already done. Today is just the routine so nothing feels new tomorrow.'});
 
 D.shakeout=c=>({
-  title:'Shakeout',tag:'LOW',warm:WARM_SHORT,
-  track:[I('EASY','10 min easy movement','Jog, skip, walk. Grass if you can.',''),
-         I('DRILLS','Dribbles & A-skips 4 × 20m','Easy effort, good shapes.',''),
-         I('MOBILITY','10 min stretching','Hips, calves, hamstrings.','')],
-  vol:0,mins:30,
-  why:'Move enough to feel loose, not enough to cost anything. Sleep and food matter more today than anything on the track.'});
+  title:'Shakeout',tag:'LOW',warm:WARM_SHORT,guide:'—',
+  track:[I('EASY','10 min easy','Jog, skip, walk. Grass if you can.',''),
+    I('DRILLS','Dribbles + A-skips 4 × 20m','Easy effort.',''),
+    I('STRETCH','10 min','Hips, calves, hamstrings.','')],
+  vol:0,mins:30,why:'Loose, not tired. Sleep and food matter more today than anything on the track.'});
 
 D.race=c=>({
-  title:'RACE DAY',tag:'RACE',warm:['Meet-day timeline',[
-    '90 min out — arrive, walk the track, check the schedule',
-    '50 min out — jog, hip circuit, drills',
-    '35 min out — spikes on, 3 × 30m build-ups',
-    '25 min out — 2 block starts to 15m',
-    '15 min out — stay warm and moving, sit as little as possible',
-    'Report when called. Blocks. Breathe out. Go.']],
-  track:[I('RACE','Your event','First 30m push and stay low. Middle: relax your face and hands. Last 20m nothing changes — you just keep running.',''),
-         (c.T&&c.T.s1?I('400 PLAN','Split '+c.T.s1+' / '+c.T.s2+' for '+c.T.goal,'Go through 200 controlled. If you hit the 200 at your open PR pace you went out too hard and the last 100 is gone.',''):null),
-         I('ROUNDS','If there are multiple rounds','Re-warm 10 min after each, eat something small, keep the legs moving.',''),
-         I('AFTER','Cool down','10 min jog or walk, 10 min stretch. Write your times down before you forget them.','')],
-  vol:0,mins:0,
-  why:'Race the plan you rehearsed all week. Times go in the notebook either way — that record is how you know what\u2019s working.'});
+  title:'RACE DAY',tag:'RACE',guide:'—',warm:['Meet-day timeline',
+    ['90 min out — get there, walk the track, check the schedule','50 min out — jog, hips, drills',
+     '35 min out — spikes on, 3 × 30m build-ups','25 min out — 2 starts to 15m',
+     '15 min out — stay warm, stay moving, don\u2019t sit','Report. Blocks. Breathe out. Go.']],
+  track:[I('RACE','Your event','First 30m push and stay low. Middle, relax your face and hands. Last 20m, nothing changes.',''),
+    (c.T&&c.T.s1?I('400 PLAN',c.T.s1+' / '+c.T.s2+' for '+c.T.goal,'Through 200 controlled. Hit 200 at your open PR pace and the last 100 is gone.',''):null),
+    I('AFTER','Cool down','10 min jog, 10 min stretch. Write your times down.','')],
+  vol:0,mins:0,why:'Race the plan you\u2019ve been rehearsing. Times go in the notebook either way.'});
 
 D.main_high=c=>{const s=D.spd_end_short(c);s.title='Last hard day';
-  s.why='Final heavy session before the meet. Five days out gives the nervous system time to rebound fully. After today everything gets shorter and faster.';return s;};
+  s.why='Final hard session. Five days out gives you time to bounce back. Everything after this gets shorter and faster.';return s;};
 
-D.tempo_ext=c=>{const sets=2,reps=sc(8,c);return{
-  title:'Tempo & general strength',tag:'LOW',warm:WARM_SHORT,
-  track:[I('TEMPO',sets+' × '+reps+' × 100m at 65–75%','On grass if you can find it. This should feel almost slow — that is the point.','30–45s between reps · 3 min between sets')],
-  extra:[GSCIRCUIT,MEDLOW],vol:0,tempo:sets*reps*100,mins:70,
-  why:'The only tempo day of the week, so it carries the whole recovery load. Run it too hard and you get the fatigue of a speed day with none of the speed.'};};
+D.tempo_ext=c=>{const s=2,r=sc(8,c);return{
+  title:'Tempo',tag:'LOW',warm:WARM_SHORT,guide:'tempo 1000–2000m',
+  track:[I('TEMPO',s+' × '+r+' × 100m at 65–75%','On grass if you can. Should feel almost slow. That\u2019s the point.','30–45s between reps · 3 min between sets')],
+  extra:[CIRCUIT,MEDLOW],vol:0,tempo:s*r*100,mins:65,
+  why:'Easy running is what makes tomorrow\u2019s fast day fast. Run it hard and you just get tired for nothing.'};};
 
-D.tempo_mid=c=>{const sets=2,reps=sc(6,c);return{
-  title:'Tempo & circuit',tag:'LOW',warm:WARM_SHORT,
-  track:[I('TEMPO',sets+' × '+reps+' × 100m at 65–75%','Grass, relaxed, hands loose.','30–45s between reps · 3 min between sets')],
-  extra:[GSCIRCUIT],vol:0,tempo:sets*reps*100,mins:55,
-  why:'Recovery work with a job: hold your work capacity without touching the nervous system.'};};
+D.tempo_mid=c=>{const s=2,r=sc(6,c);return{
+  title:'Tempo',tag:'LOW',warm:WARM_SHORT,guide:'tempo 1000–2000m',
+  track:[I('TEMPO',s+' × '+r+' × 100m at 65–75%','Grass, relaxed, hands loose.','30–45s between reps · 3 min between sets')],
+  extra:[CIRCUIT],vol:0,tempo:s*r*100,mins:55,why:'Keeps your fitness up without touching your nervous system.'};};
 
-D.tempo_light=c=>{const reps=sc(8,c);return{
-  title:'Easy tempo',tag:'LOW',warm:WARM_SHORT,
-  track:[I('TEMPO',reps+' × 100m at 65%','Grass. Slow enough to talk at the end of the last one.','45s between reps')],
-  extra:[MEDLOW],vol:0,tempo:reps*100,mins:40,
-  why:'Just circulation. In season, less is more — you\u2019re protecting the races.'};};
+D.tempo_light=c=>{const r=sc(8,c);return{
+  title:'Easy tempo',tag:'LOW',warm:WARM_SHORT,guide:'tempo 1000–2000m',
+  track:[I('TEMPO',r+' × 100m at 65%','Slow enough to talk at the end of the last one.','45s between')],
+  extra:[MEDLOW],vol:0,tempo:r*100,mins:40,why:'Just circulation. In season, less is more.'};};
 
 D.recovery=c=>({
-  title:'Recovery',tag:'LOW',warm:WARM_SHORT,
-  track:[I('MOVE','15 min easy movement','Jog, bike or pool. Nothing that leaves a mark.',''),
-         I('DRILLS','Dribbles & ankling 4 × 20m','Technique at low effort.',''),
-         I('MOBILITY','Hurdle mobility 2 × 6 over-unders','Then 10 min stretching.','')],
-  extra:[MEDLOW],vol:0,mins:35,
-  why:'Recovery is a session with a purpose, not the absence of one. Do it properly and Monday is 10% better.'});
+  title:'Recovery',tag:'LOW',warm:WARM_SHORT,guide:'—',
+  track:[I('MOVE','15 min easy','Jog, bike, or pool. Nothing that leaves a mark.',''),
+    I('DRILLS','Dribbles + ankling 4 × 20m','',''),I('MOBILITY','Hurdle over-unders 2 × 6','Then 10 min stretching.','')],
+  extra:[MEDLOW],vol:0,mins:35,why:'Recovery is a session, not a day off. Do it right and Monday is better.'});
 
-D.off=c=>({
-  title:'Rest',tag:'OFF',warm:null,
-  track:[I('REST','Full day off','Sleep 8–9 hours. Eat properly. If you\u2019re stiff, walk 15 min and stretch.','')],
-  vol:0,mins:0,
-  why:'One of your days off. Getting faster happens while you rest, not while you train — skipping these is the most common way high school sprinters stall out.'});
+D.off=c=>({title:'Rest',tag:'OFF',warm:null,guide:'—',
+  track:[I('REST','Day off','Sleep 8–9 hours. Eat. If you\u2019re stiff, walk 15 min and stretch.','')],
+  vol:0,mins:0,why:'You get faster while you rest, not while you train. Skipping these is how people stall out.'});
 
 /* ================= plan builder ================= */
-/* Pick k training days spread as evenly as possible around the week (wrapping
-   Sunday to Monday), so two hard days never end up back to back. */
-function combos(arr,k){const out=[];(function rec(s,cur){
-  if(cur.length===k){out.push(cur.slice());return;}
-  for(let i=s;i<arr.length;i++){cur.push(arr[i]);rec(i+1,cur);cur.pop();}})(0,[]);return out;}
-function spreadDays(avail,k){
-  if(k>=avail.length)return avail.slice();
-  let best=avail.slice(0,k),score=-1;
-  combos(avail,k).forEach(c=>{
-    let min=9;
-    for(let i=0;i<c.length;i++){const g=((c[(i+1)%c.length]-c[i])+7)%7||7; if(g<min)min=g;}
-    const s=min*100-c[0];
-    if(s>score){score=s;best=c;}
-  });
-  return best;
-}
-function restOf(cfg){
-  const r=Array.isArray(cfg.rest)?cfg.rest:[3,6];
-  return r.length>=7?[3,6]:r;                 // never let every day be a rest day
-}
+function combos(a,k){const o=[];(function r(s,c){if(c.length===k){o.push(c.slice());return;}
+  for(let i=s;i<a.length;i++){c.push(a[i]);r(i+1,c);c.pop();}})(0,[]);return o;}
+function spreadDays(a,k){if(k>=a.length)return a.slice();let best=a.slice(0,k),sc=-1;
+  combos(a,k).forEach(c=>{let mn=9;for(let i=0;i<c.length;i++){const g=((c[(i+1)%c.length]-c[i])+7)%7||7;if(g<mn)mn=g;}
+    const s=mn*100-c[0];if(s>sc){sc=s;best=c;}});return best;}
+function restOf(cfg){const r=Array.isArray(cfg.rest)?cfg.rest:[3,6];return r.length>=7?[3,6]:r;}
 function weekLayout(cfg,phase,cyc){
-  const rest=restOf(cfg);
-  const avail=[0,1,2,3,4,5,6].filter(d=>rest.indexOf(d)<0);
+  const rest=restOf(cfg),avail=[0,1,2,3,4,5,6].filter(d=>rest.indexOf(d)<0);
   const keys=Array(7).fill('off'),slots=Array(7).fill(null);
-  if(!avail.length)return{keys,slots,avail};
+  if(!avail.length)return{keys,slots};
   let roles=PHASES[phase].q.slice();
   const ev=ROTATION[cfg.event]?cfg.event:(cfg.event==='mid'?'quarter':'all');
   roles[roles.length-1]=ROTATION[ev][phase][CYCIDX[cyc.n]];
-  // fewer training days than roles: the lift-led day is the first thing to go
+  const t=cfg.terrain||'track';
+  if(phase==='gpp'&&roles[0]==='accel_bound'){
+    if(t==='sand')roles[0]='sand_dunes';
+    else if(t==='both')roles[0]=(cyc.n==='Unload')?'sand_dunes':'accel_bound';
+    else if(t==='track')roles[0]='accel_blocks';
+  }
+  if(t==='track'&&roles[roles.length-1]==='hill200')roles[roles.length-1]='special_end';
   const k=Math.min(roles.length,Math.max(1,avail.length-1));
   while(roles.length>k){const i=roles.indexOf('lift_led');roles.splice(i>=0?i:roles.length-1,1);}
   const q=spreadDays(avail,k),SLOT=['A','B','C'];
   q.forEach((d,i)=>{keys[d]=roles[i];slots[d]=(k===2?(i===0?'A':'C'):SLOT[i]);});
-  let tempoDone=false;
-  avail.filter(d=>q.indexOf(d)<0).forEach(d=>{keys[d]=tempoDone?'recovery':PHASES[phase].tempo;tempoDone=true;});
-  return{keys,slots,avail};
+  let td=false;
+  avail.filter(d=>q.indexOf(d)<0).forEach(d=>{keys[d]=td?'recovery':PHASES[phase].tempo;td=true;});
+  return{keys,slots};
 }
 function gymFor(slot,key,out,c){
-  if(key==='off'||key==='race')  return[['Gym','none']];
-  if(out>=0&&out<=3)             return[['Gym','none — nothing heavy inside 3 days of a meet']];
-  if(out<0&&out>=-3)             return[['Gym','none — let the race clear before you load again']];
-  if(!slot)                      return[];
+  if(key==='off'||key==='race')return[['Gym','none']];
+  if(out>=0&&out<=3)return[['Gym','none — nothing heavy within 3 days of a meet']];
+  if(out<0&&out>=-3)return[['Gym','none — let the race clear first']];
+  if(!slot)return[];
   const L=LIFT[slot];
   return[[L.title,L.rows(c).map(r=>[r[0],gs(r[1],c)+' × '+r[2],r[3]])]];
 }
 function seasonOf(monday,cfg){
-  const anchorOut=diffDays(parseISO(cfg.date),monday);
-  const weeksOut=Math.max(0,Math.ceil(anchorOut/7));
-  return{phase:anchorOut<0?'comp':phaseFor(weeksOut),
-         cyc:CYCLE[(weeksOut%3===0)?0:(weeksOut%3===2?1:2)]};
+  const a=diffDays(parseISO(cfg.date),monday),w=Math.max(0,Math.ceil(a/7));
+  return{phase:a<0?'comp':phaseFor(w),cyc:CYCLE[(w%3===0)?0:(w%3===2?1:2)]};
 }
 function buildDay(date,cfg,anchor,layout,season){
-  const out=diffDays(parseISO(cfg.date),date);
-  const dow=(date.getDay()+6)%7,rest=restOf(cfg);
-  const {phase,cyc}=season;
-  let mult=cyc.m,key,slot=null;
-
-  if(out>=0&&out<=6){                                    // race week overrides the layout
-    key=RACEWEEK[out]; mult=out<=3?0.5:0.7;
-    if(rest.indexOf(dow)>=0&&key!=='race'&&key!=='pre_meet') key='off';
-    if(key==='main_high') slot='C';
-  }else if(out<0&&AFTERMEET[-out]){
-    key=AFTERMEET[-out]; mult=0.7;
-    if(rest.indexOf(dow)>=0) key='off';
-  }else{
-    key=layout.keys[dow]; slot=layout.slots[dow];
-  }
+  const out=diffDays(parseISO(cfg.date),date),dow=(date.getDay()+6)%7,rest=restOf(cfg);
+  const{phase,cyc}=season;let mult=cyc.m,key,slot=null;
+  if(out>=0&&out<=6){key=RACEWEEK[out];mult=out<=3?.5:.7;
+    if(rest.indexOf(dow)>=0&&key!=='race'&&key!=='pre_meet')key='off';
+    if(key==='main_high')slot='C';}
+  else if(out<0&&AFTERMEET[-out]){key=AFTERMEET[-out];mult=.7;if(rest.indexOf(dow)>=0)key='off';}
+  else{key=layout.keys[dow];slot=layout.slots[dow];}
   const c={phase,mult,k:LEVELS[cfg.level].k,level:cfg.level,event:cfg.event,T:TARGETS(cfg)};
   const s=(D[key]||D.off)(c);
-  if(slot==='A'&&(s.tag==='HIGH'||s.tag==='MED')&&out>6) s.plyo=BOUND[phase];   // one jump session a week
+  if(slot==='A'&&(s.tag==='HIGH'||s.tag==='MED')&&out>6)s.plyo=BOUND[phase];
   s.gym=gymFor(slot,key,out,c).concat(s.extra||[]);
   return Object.assign({date,key,phase,cycle:cyc.n,load:Math.round(mult*100)},s);
 }
@@ -682,160 +576,136 @@ function weekOf(monday,cfg){
   return Array.from({length:7},(_,i)=>buildDay(addDays(monday,i),cfg,monday,layout,season));
 }
 
-/* ================= state & render ================= */
-let cfg=null, weekOffset=0;
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+/* ================= runner glyphs ================= */
+const FIG={
+  HIGH:'<circle cx="66" cy="16" r="8" fill="CC" stroke="none"/><path d="M62 28 L46 58"/><path d="M46 58 L66 62 L70 42"/><path d="M46 58 L32 80 L22 100"/><path d="M60 33 L76 40 L80 25"/><path d="M60 33 L44 41 L40 55"/>',
+  MED:'<circle cx="60" cy="16" r="8" fill="CC" stroke="none"/><path d="M58 28 L50 58"/><path d="M50 58 L64 68 L64 92"/><path d="M50 58 L36 78 L30 98"/><path d="M56 34 L68 44 L66 30"/><path d="M56 34 L42 44 L40 58"/>',
+  LOW:'<circle cx="54" cy="16" r="8" fill="CC" stroke="none"/><path d="M54 28 L52 60"/><path d="M52 60 L62 74 L60 98"/><path d="M52 60 L40 76 L36 98"/><path d="M53 36 L64 46 L62 34"/><path d="M53 36 L42 46 L42 58"/>',
+  RACE:'<circle cx="76" cy="34" r="8" fill="CC" stroke="none"/><path d="M70 42 L38 58"/><path d="M38 58 L56 66 L58 90"/><path d="M38 58 L26 78 L24 98"/><path d="M66 46 L70 72 L70 92"/><path d="M50 54 L44 76"/>',
+  OFF:'<circle cx="50" cy="16" r="8" fill="CC" stroke="none"/><path d="M50 28 L50 62"/><path d="M50 62 L44 84 L44 100"/><path d="M50 62 L58 84 L58 100"/><path d="M50 36 L38 52"/><path d="M50 36 L62 52"/>'
+};
+const FIGCOL={HIGH:'var(--torch)',MED:'var(--amber)',LOW:'var(--cool)',RACE:'var(--gold)',OFF:'var(--slate)'};
+function fig(tag){const col=FIGCOL[tag]||'var(--slate)';
+  return '<svg class="fig" viewBox="0 0 100 120" fill="none" aria-hidden="true"><g stroke="'+col+
+    '" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">'+
+    (FIG[tag]||FIG.OFF).replace(/CC/g,col)+'</g></svg>';}
 
+/* ================= state & render ================= */
+let cfg=null,weekOffset=0;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 function loadCfg(){try{return JSON.parse(store.get('lane4')||'null')}catch(e){return null}}
 function saveCfg(c){store.set('lane4',JSON.stringify(c))}
-
-function chipGroup(id,val){$$('#'+id+' .chip').forEach(b=>b.classList.toggle('on',b.dataset.v===val));}
+function chipGroup(id,v){$$('#'+id+' .chip').forEach(b=>b.classList.toggle('on',b.dataset.v===v));}
 function wireChips(id,cb){$$('#'+id+' .chip').forEach(b=>b.onclick=()=>{chipGroup(id,b.dataset.v);cb(b.dataset.v)});}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');
+  clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),2000);}
 
-let draft={event:'short',level:'dev',rest:[3,6],pr:{}};
+let draft={event:'short',level:'dev',rest:[3,6],pr:{},terrain:'track'};
 wireChips('f-event',v=>draft.event=v);
 wireChips('f-level',v=>draft.level=v);
-const DAYABBR=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+wireChips('f-terrain',v=>draft.terrain=v);
 function paintRest(){
   $$('#f-rest .chip').forEach(b=>b.classList.toggle('on',draft.rest.indexOf(+b.dataset.v)>=0));
-  const n=7-draft.rest.length,hint=$('#rest-hint');
-  if(n<=0)      hint.innerHTML='<span style="color:var(--torch)">Pick at least one day to train.</span>';
-  else if(n<3)  hint.innerHTML='<span style="color:var(--torch)">'+n+' training day'+(n>1?'s':'')+' — enough for speed work, but not much else.</span>';
-  else if(n>6)  hint.innerHTML='<span style="color:var(--torch)">No days off. Take at least one — that\u2019s where the speed comes from.</span>';
-  else          hint.textContent='Training '+n+' days. Tap to toggle — everything gets built around your days off.';
+  const n=7-draft.rest.length,h=$('#rest-hint');
+  if(n<=0)h.innerHTML='<span style="color:var(--torch)">Leave yourself at least one day to train.</span>';
+  else if(n<3)h.innerHTML='<span style="color:var(--torch)">Only '+n+' training day'+(n>1?'s':'')+' — that\u2019s pretty thin.</span>';
+  else if(n>6)h.innerHTML='<span style="color:var(--torch)">Take at least one day off. That\u2019s where the speed comes from.</span>';
+  else h.textContent='Training '+n+' days a week.';
 }
-$$('#f-rest .chip').forEach(b=>b.onclick=()=>{
-  const v=+b.dataset.v,i=draft.rest.indexOf(v);
-  if(i>=0)draft.rest.splice(i,1); else draft.rest.push(v);
-  draft.rest.sort((a,b)=>a-b); paintRest();
-});
+$$('#f-rest .chip').forEach(b=>b.onclick=()=>{const v=+b.dataset.v,i=draft.rest.indexOf(v);
+  if(i>=0)draft.rest.splice(i,1);else draft.rest.push(v);draft.rest.sort((a,b)=>a-b);paintRest();});
 
-function showSetup(existing){
-  $('#app').classList.add('hidden'); $('#setup').classList.remove('hidden');
-  draft=Object.assign({event:'short',level:'dev',rest:[3,6],pr:{}},existing||{});
+function showSetup(ex){
+  $('#app').classList.add('hidden');$('#setup').classList.remove('hidden');
+  draft=Object.assign({event:'short',level:'dev',rest:[3,6],pr:{},terrain:'track'},ex||{});
   if(!Array.isArray(draft.rest))draft.rest=[3,6];
-  draft.rest=draft.rest.slice(); draft.pr=Object.assign({},draft.pr);
-  $('#f-date').value=draft.date||''; $('#f-name').value=draft.name||'';
-  $('#f-h').value=draft.pr.h||''; $('#f-t').value=draft.pr.t||''; $('#f-q').value=draft.pr.q||'';
-  chipGroup('f-event',draft.event);chipGroup('f-level',draft.level);paintRest();
-  $('#cancel').classList.toggle('hidden',!existing);
-  window.scrollTo(0,0);
+  draft.rest=draft.rest.slice();draft.pr=Object.assign({},draft.pr);
+  $('#f-date').value=draft.date||'';$('#f-name').value=draft.name||'';
+  $('#f-h').value=draft.pr.h||'';$('#f-t').value=draft.pr.t||'';$('#f-q').value=draft.pr.q||'';
+  chipGroup('f-event',draft.event);chipGroup('f-level',draft.level);chipGroup('f-terrain',draft.terrain);paintRest();
+  $('#cancel').classList.toggle('hidden',!ex);window.scrollTo(0,0);
 }
 $('#go').onclick=()=>{
   const d=$('#f-date').value;
   if(!d){toast('Pick your meet date first');$('#f-date').focus();return;}
-  if(draft.rest.length>=7){toast('Leave yourself at least one day to train');return;}
+  if(draft.rest.length>=7){toast('Leave at least one training day');return;}
   cfg={date:d,name:$('#f-name').value.trim(),event:draft.event,level:draft.level,rest:draft.rest.slice(),
-       pr:{h:$('#f-h').value.trim(),t:$('#f-t').value.trim(),q:$('#f-q').value.trim()}};
-  saveCfg(cfg); weekOffset=0; render(); 
+       terrain:draft.terrain,pr:{h:$('#f-h').value.trim(),t:$('#f-t').value.trim(),q:$('#f-q').value.trim()}};
+  saveCfg(cfg);weekOffset=0;render();
 };
 $('#cancel').onclick=()=>{if(cfg){$('#setup').classList.add('hidden');$('#app').classList.remove('hidden');}};
 $('#edit').onclick=()=>showSetup(cfg);
-$('#prev').onclick=()=>{weekOffset--;render(true)};
-$('#next').onclick=()=>{weekOffset++;render(true)};
+$('#prev').onclick=()=>{weekOffset--;render(1)};
+$('#next').onclick=()=>{weekOffset++;render(1)};
 
-function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');
-  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),2000);}
-
-function render(keepScroll){
-  $('#setup').classList.add('hidden'); $('#app').classList.remove('hidden');
-  const today=midnight(new Date()), meet=parseISO(cfg.date), out=diffDays(meet,today);
-
-  if(!EVENTS[cfg.event]) cfg.event=(cfg.event==='mid'?'quarter':'all');
+function render(keep){
+  $('#setup').classList.add('hidden');$('#app').classList.remove('hidden');
+  if(!EVENTS[cfg.event])cfg.event='all';
+  const today=midnight(new Date()),meet=parseISO(cfg.date),out=diffDays(meet,today);
   $('#h-meet').textContent=cfg.name||EVENTS[cfg.event];
   $('#h-days').textContent=Math.abs(out);
-  if(out>0){$('#h-eyebrow').textContent='Days until race day';$('#h-unit').firstChild.textContent=out===1?'DAY':'DAYS';}
-  else if(out===0){$('#h-eyebrow').textContent='Race day';$('#h-unit').firstChild.textContent='TODAY';$('#h-days').textContent='0';}
+  if(out>0){$('#h-eyebrow').textContent='Days to race day';$('#h-unit').firstChild.textContent=out===1?'DAY':'DAYS';}
+  else if(out===0){$('#h-eyebrow').textContent='Race day';$('#h-unit').firstChild.textContent='TODAY';}
   else{$('#h-eyebrow').textContent='Days since your last meet';$('#h-unit').firstChild.textContent='DAYS';}
-  $('#h-date').textContent=fmtLong(meet)+(meet.getFullYear()!==today.getFullYear()?' '+meet.getFullYear():'');
+  $('#h-date').textContent=fmtLong(meet);
 
-  const monday=addDays(mondayOf(today),weekOffset*7);
-  const week=weekOf(monday,cfg);
-  const ref=week.find(d=>d.key!=='off')||week[0];
-  const isRaceWeek=week.some(d=>d.tag==='RACE');
-  $('#h-pills').innerHTML=
-    `<span class="pill on">${isRaceWeek?'Race week':PHASES[ref.phase].name}</span>`+
-    `<span class="pill">${isRaceWeek?'Taper':ref.cycle+' week'}</span>`+
-    `<span class="pill load">Volume ${ref.load}%</span>`+
-    `<span class="pill">${EVENTS[cfg.event]}</span>`;
-
-  $('#w-label').textContent = weekOffset===0?'This week':(weekOffset===1?'Next week':(weekOffset===-1?'Last week':(weekOffset>0?'In '+weekOffset+' weeks':Math.abs(weekOffset)+' weeks ago')));
+  const monday=addDays(mondayOf(today),weekOffset*7),week=weekOf(monday,cfg);
+  const ref=week.find(d=>d.key!=='off')||week[0],raceWeek=week.some(d=>d.tag==='RACE');
+  $('#h-pills').innerHTML=`<span class="pill on">${raceWeek?'Race week':PHASES[ref.phase].name}</span>`+
+    `<span class="pill">${raceWeek?'Taper':ref.cycle}</span>`+
+    `<span class="pill load">Volume ${ref.load}%</span>`+`<span class="pill">${EVENTS[cfg.event]}</span>`;
+  $('#w-label').textContent=weekOffset===0?'This week':weekOffset===1?'Next week':
+    weekOffset===-1?'Last week':weekOffset>0?'In '+weekOffset+' weeks':Math.abs(weekOffset)+' weeks ago';
   $('#w-range').textContent=fmt(monday)+' – '+fmt(addDays(monday,6));
-  $('#prev').disabled=weekOffset<=-4; $('#next').disabled=weekOffset>=26;
-
+  $('#prev').disabled=weekOffset<=-4;$('#next').disabled=weekOffset>=26;
   $('#lanes').innerHTML=week.map((d,i)=>laneHTML(d,i,today)).join('');
-  $$('.lane .head').forEach(h=>h.onclick=()=>{
-    const l=h.closest('.lane'); const open=l.classList.contains('open');
-    l.classList.toggle('open',!open);
-    l.querySelector('.detail').classList.toggle('hidden',open);
-  });
-  if(!keepScroll){
-    const t=$('.lane.today'); if(t){t.classList.add('open');t.querySelector('.detail').classList.remove('hidden');}
-    window.scrollTo(0,0);
-  }
+  $$('.lane .head').forEach(h=>h.onclick=()=>{const l=h.closest('.lane'),o=l.classList.contains('open');
+    l.classList.toggle('open',!o);l.querySelector('.detail').classList.toggle('hidden',o);});
+  if(!keep){const t=$('.lane.today');
+    if(t){t.classList.add('open');t.querySelector('.detail').classList.remove('hidden');}window.scrollTo(0,0);}
 }
-
 function laneHTML(d,i,today){
   const isToday=diffDays(d.date,today)===0;
-  const volTxt=d.tag==='RACE'?'compete':(d.vol?d.vol+'m fast':
-    (d.tempo?d.tempo+'m '+(d.tag==='MED'?'at 80–85%':'easy'):'no running'));
-  const timeTxt=d.mins?' · '+d.mins+' min':'';
+  const v=d.tag==='RACE'?'race day':(d.vol?d.vol+'m fast':(d.tempo?d.tempo+'m '+(d.tag==='MED'?'@80–85%':'easy'):'no running'));
   return `<article class="lane${isToday?' today':''}" data-tag="${d.tag}">
-    <button class="head">
-      <span class="stripe"></span>
-      <span class="laneno"><b>${i+1}</b><span>${DAYNAMES[i].slice(0,3)}</span></span>
+    <button class="head"><span class="stripe"></span>
+      <span class="laneno">${fig(d.tag)}<span>${DAYNAMES[i].slice(0,3)}</span></span>
       <span class="headtxt">
         <span class="row1"><span class="tag">${d.tag}</span>${isToday?'<span class="todaytag">TODAY</span>':''}</span>
         <h3>${d.title}</h3>
-        <span class="meta">${fmt(d.date)} · ${volTxt}${timeTxt}</span>
-      </span>
-      <span class="chev">▼</span>
-    </button>
+        <span class="meta">${fmt(d.date)} · ${v}${d.mins?' · '+d.mins+' min':''}</span>
+      </span><span class="chev">▼</span></button>
     <div class="detail hidden">
       ${d.warm?`<details class="warm blk"><summary>${d.warm[0]}</summary><ul>${d.warm[1].map(x=>'<li>'+x+'</li>').join('')}</ul></details>`:''}
-      ${d.track&&d.track.length?`<div class="blk"><h4>On the track<em>${d.vol?d.vol+'m at full speed':''}</em></h4>
-        ${d.track.filter(Boolean).map(t=>`<div class="item"><span class="k">${t.k}</span><span class="v"><b>${t.v}</b>${t.s?`<small>${t.s}</small>`:''}${t.rest?`<small class="rest">${t.rest}</small>`:''}</span></div>`).join('')}
-      </div>`:''}
-      ${d.plyo?`<div class="blk"><h4>On the track — jumps</h4><p class="plain"><b>${d.plyo[0]}</b><br>${d.plyo[1]}</p></div>`:''}
+      ${d.track&&d.track.length?`<div class="blk"><h4>Track</h4>${d.track.filter(Boolean).map(t=>
+        `<div class="item"><span class="k">${t.k}</span><span class="v"><b>${t.v}</b>${t.s?`<small>${t.s}</small>`:''}${t.rest?`<small class="rest">${t.rest}</small>`:''}</span></div>`).join('')}</div>`:''}
+      ${d.plyo?`<div class="blk"><h4>Jumps — on the track</h4><p class="plain">${d.plyo[1]}</p></div>`:''}
       ${gymHTML(d)}
       <div class="why"><b>Why:</b> ${d.why}</div>
-    </div>
-  </article>`;
+      ${d.guide&&d.guide!=='—'?`<p class="cite">This session ${d.vol?d.vol+'m':(d.tempo?d.tempo+'m':'—')} · typical ${d.guide}${d.load<80?' · lighter, unload week':''}<br>Sports Medicine review of elite sprint training, Table 2</p>`:''}
+    </div></article>`;
 }
 function gymHTML(d){
   if(!d.gym||!d.gym.length)return'';
   return d.gym.map(g=>{
-    if(typeof g[1]==='string')
-      return `<div class="blk"><h4>${g[0]}</h4><p class="plain">${g[1]}</p></div>`;
     if(Array.isArray(g[1])&&Array.isArray(g[1][0]))
-      return `<div class="blk"><h4>Gym — same day, after the track</h4>
-        <p class="plain" style="margin:0 0 8px"><b>${g[0]}</b></p>
-        ${g[1].map(r=>`<div class="item"><span class="k">${r[1]}</span><span class="v"><b>${r[0]}</b>${r[2]?`<small>${r[2]}</small>`:''}</span></div>`).join('')}</div>`;
+      return `<div class="blk"><h4>Weight room — after the track</h4><p class="plain"><b>${g[0]}</b></p>${
+        g[1].map(r=>`<div class="item"><span class="k">${r[1]}</span><span class="v"><b>${r[0]}</b>${r[2]?`<small>${r[2]}</small>`:''}</span></div>`).join('')}</div>`;
     return `<div class="blk"><h4>${g[0]}</h4><p class="plain">${g[1]}</p></div>`;
   }).join('');
 }
-
-/* ---- copy as text ---- */
 $('#copy').onclick=async()=>{
-  const monday=addDays(mondayOf(midnight(new Date())),weekOffset*7);
-  const wk=weekOf(monday,cfg); const meet=parseISO(cfg.date);
-  let t=`LANE 4 — week of ${fmt(monday)}\nMeet: ${cfg.name||'next meet'} — ${fmtLong(meet)} (${diffDays(meet,midnight(new Date()))} days out)\nPhase: ${PHASES[wk[0].phase].name} · ${wk[0].cycle} week · volume ${wk[0].load}%\n`;
-  wk.forEach((d,i)=>{
-    t+=`\n${DAYNAMES[i].toUpperCase()} ${fmt(d.date)} — [${d.tag}] ${d.title}\n`;
+  const monday=addDays(mondayOf(midnight(new Date())),weekOffset*7),wk=weekOf(monday,cfg),meet=parseISO(cfg.date);
+  let t=`LANE 4 — week of ${fmt(monday)}\n${cfg.name||'Next meet'}: ${fmtLong(meet)} (${diffDays(meet,midnight(new Date()))} days)\n`;
+  wk.forEach((d,i)=>{t+=`\n${DAYNAMES[i].toUpperCase()} ${fmt(d.date)} — [${d.tag}] ${d.title}\n`;
     (d.track||[]).filter(Boolean).forEach(x=>{t+=`  • ${x.v}${x.rest?' ('+x.rest+')':''}\n`;});
-    (d.gym||[]).forEach(g=>{
-      if(Array.isArray(g[1])&&Array.isArray(g[1][0])){t+=`  GYM — ${g[0]}\n`;g[1].forEach(r=>t+=`    - ${r[0]}: ${r[1]}\n`);}
-      else t+=`  ${g[0]}: ${g[1]}\n`;
-    });
-  });
-  try{await navigator.clipboard.writeText(t);toast('Week copied');}
-  catch(e){toast('Copy blocked — take a screenshot instead');}
+    (d.gym||[]).forEach(g=>{if(Array.isArray(g[1])&&Array.isArray(g[1][0])){t+=`  GYM — ${g[0]}\n`;
+      g[1].forEach(r=>t+=`    - ${r[0]}: ${r[1]}\n`);}else t+=`  ${g[0]}: ${g[1]}\n`;});});
+  try{await navigator.clipboard.writeText(t);toast('Copied');}catch(e){toast('Copy blocked — screenshot it');}
 };
-
-/* ---- boot ---- */
 cfg=loadCfg();
-if(cfg&&cfg.date) render(); else showSetup(null);
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+if(cfg&&cfg.date)render();else showSetup(null);
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
 </html>

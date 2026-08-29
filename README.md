@@ -118,6 +118,28 @@ sprinter with real speed and an untrained fourth lap — which is what the **400
 is built for. It runs special endurance two weeks in three, while still protecting the max
 velocity day every single week.
 
+### Sprint volumes come from published guidelines
+
+Every session shows its own volume against the range in Table 2 of the Sports Medicine review
+of elite sprint training, so nothing here is invented:
+
+| Session type | Distance | Intensity | Recovery | Session volume |
+|---|---|---|---|---|
+| Acceleration | 10–50m | >98% | 2–7 min | 100–300m |
+| Max velocity | 10–30m fly | >98% | 4–15 min | 50–150m |
+| Specific endurance | 80–150m | >95% | 8–30 min | 300–900m |
+| Sub-max running | 60–80m | 90–95% | 2–4 min | 600–2000m |
+| Tempo | 100–300m | 60–70% | 1–3 min | 1000–2000m |
+
+Two more rules layered on top, from Classifying Sprint Training Methods: rest roughly **1–2
+minutes per second spent sprinting** (a 5-second effort wants 5–10 minutes), and **end the
+session when technique breaks down**, whatever the plan said. On unload weeks volumes drop
+below the published range on purpose, and the app labels them as such.
+
+The acceleration cap of ~300m per session and the 1000–2000m tempo range also match Sprint
+Training Explained, which notes that beyond 2000m of tempo a short sprinter gets no extra
+benefit and just compromises the rest of the week.
+
 ### About lactate clearance
 
 Three things in the program do this work, and they're deliberate:
@@ -165,18 +187,35 @@ weeks, and never inside two weeks of a meet. Distance is scaled by training age:
 a first-year athlete, 2 × 150m at two to three years, 2 × 180m after that. The grade caps
 velocity, which is what makes a maximal effort safe for a young hamstring.
 
-### The Olympic lifts are gated by training age
+### The gym days use movements every high school weight room already has
 
-| Years training | Day A | Day B | Day C |
+No Olympic-lift derivatives. The Sports Medicine review of elite sprint training practices
+lists split squats, single-leg deadlifts, lunges, step-ups and single-leg squats as the
+standard substitute for snatch and clean work — that's the substitution used here, on the
+same 8–12 / 5–7 / 3–5 wave:
+
+| | Day A · 8–12 reps | Day B · 5–7 reps | Day C · 3–5 reps, fast |
 |---|---|---|---|
-| 1st year | Clean-grip shrug + mid-thigh pull | Clean-grip high pull | Jump shrug |
-| 2nd–3rd | Mid-thigh pull | Hang power clean from the knee | Power clean from blocks |
-| 4+ | Mid-thigh pull | Hang power clean | Power clean |
+| Squat pattern | Back squat | Front squat or trap-bar deadlift | Trap-bar jump squat |
+| Hip hinge | Romanian deadlift | Single-leg RDL | Kettlebell swing |
+| Push | Bench / incline press | Incline press | Push press |
+| Pull | Pull-up / lat pulldown | Weighted pull-up | — |
+| Single-leg / power | Walking lunge | Bulgarian split squat | Box jump, broad jump |
 
-A first-year athlete never catches a bar. The pulls deliver a large share of the power
-adaptation without the technical cost, so she builds force from week one while the catch is
-still being taught. Front squat sits on Day B every week regardless of level, because the
-front rack is the prerequisite for everything in the clean family.
+The kettlebell swing and push press replace the mid-thigh pull and clean pull as the explosive
+hip-extension work — same triple-extension pattern, same speed of movement, no catch to teach
+and no specialist coach required. Tony Holler's own high-school program runs on this same
+family of lifts — squat, deadlift, bench, pull-ups — for exactly that reason.
+
+### Terrain variety: hills and sand dunes
+
+Pick what's nearby in setup. If both are available, the off-season Monday session alternates
+across the three-week cycle — regular ground on Introduce and Stabilize weeks, sand dunes on
+Unload. Percy Cerutty ran his athletes' entire off-season conditioning on sand dunes: the loose
+surface increases the work of every stride while cushioning the landing, which makes it one of
+the safer ways to run a high volume of hard efforts, and it removes the risk of a bad fall at
+full speed. The uphill 200s stay on solid ground regardless — that session needs a predictable
+grade to pace against, which sand doesn't give you.
 
 ### The last 7 days are a taper
 
