@@ -114,6 +114,17 @@ button{font-family:inherit;font-size:inherit;color:inherit;border:none;backgroun
   font-size:13.5px;color:var(--dim);line-height:1.5}
 .why b{color:var(--chalk);font-weight:600}
 .cite{margin-top:8px;font-size:11.5px;color:var(--dimmer);font-family:var(--data);line-height:1.5}
+.acts{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.acts button{background:var(--ink3);border:1px solid var(--line);color:var(--dim);border-radius:10px;
+  padding:9px 12px;font-size:13px;min-height:42px}
+.acts button:active{background:#1E2947}
+.acts button.prim{border-color:#4A3A12;background:#211A08;color:var(--gold)}
+.daypick{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.daypick button{flex:1;min-width:42px;background:var(--ink3);border:1px solid var(--line);color:var(--dim);
+  border-radius:9px;padding:9px 4px;font-size:12.5px;min-height:42px}
+.warnbar{margin:0 0 11px;padding:11px 13px;border-radius:11px;background:#241206;border:1px solid #5A3312;
+  color:#F0913A;font-size:13px;line-height:1.5}
+.movedtag{font-family:var(--display);font-size:10.5px;font-weight:800;letter-spacing:.13em;color:var(--lane)}
 .warm summary{list-style:none;cursor:pointer;font-family:var(--display);font-size:12px;font-weight:800;
   letter-spacing:.16em;color:var(--dim);padding:8px 0;border-bottom:1px solid var(--line)}
 .warm summary::-webkit-details-marker{display:none}
@@ -249,9 +260,10 @@ input[type=date],input[type=text]{width:100%;background:var(--ink2);border:1px s
       <div class="lbl"><b id="w-label">This week</b><span id="w-range">—</span></div>
       <button class="arrow" id="next" aria-label="Next week">›</button>
     </nav>
+    <div id="warn"></div>
     <div class="lane-list" id="lanes"></div>
     <div class="toolbar">
-      <button id="copy">Copy week</button><button id="edit">Change meet</button>
+      <button id="copy">Copy week</button><button id="reset">Reset week</button><button id="edit">Change meet</button>
     </div>
     <div class="note"><b>How this works.</b>
       <span style="color:var(--torch)">HARD</span> days are all-out. <span style="color:var(--cool)">EASY</span> days should feel genuinely easy — that's what lets the hard days be hard. <span style="color:var(--amber)">MEDIUM</span> shows up every three weeks for the 400.
@@ -518,14 +530,32 @@ D.off=c=>({title:'Day off',tag:'REST',warm:null,guide:'—',
 /* ================= plan builder ================= */
 function combos(a,k){const o=[];(function r(s,c){if(c.length===k){o.push(c.slice());return;}
   for(let i=s;i<a.length;i++){c.push(a[i]);r(i+1,c);c.pop();}})(0,[]);return o;}
-function spreadDays(a,k){if(k>=a.length)return a.slice();let best=a.slice(0,k),sc=-1;
-  combos(a,k).forEach(c=>{let mn=9;for(let i=0;i<c.length;i++){const g=((c[(i+1)%c.length]-c[i])+7)%7||7;if(g<mn)mn=g;}
-    const s=mn*100-c[0];if(s>sc){sc=s;best=c;}});return best;}
+function minGap(arr){if(arr.length<2)return 7;const a=arr.slice().sort((x,y)=>x-y);
+  let mn=9;for(let i=0;i<a.length;i++){const g=((a[(i+1)%a.length]-a[i])+7)%7||7;if(g<mn)mn=g;}return mn;}
+/* choose k days from `a`, keeping them as far apart as possible — and as far from
+   anything already pinned as possible */
+function spreadDays(a,k,fixed){
+  fixed=fixed||[];
+  if(k<=0)return[];
+  if(k>=a.length)return a.slice();
+  let best=a.slice(0,k),sc=-1;
+  combos(a,k).forEach(c=>{
+    const s=minGap(c.concat(fixed))*100-c[0];
+    if(s>sc){sc=s;best=c;}
+  });
+  return best;
+}
 function restOf(cfg){const r=Array.isArray(cfg.rest)?cfg.rest:[3,6];return r.length>=7?[3,6]:r;}
-function weekLayout(cfg,phase,cyc){
-  const rest=restOf(cfg),avail=[0,1,2,3,4,5,6].filter(d=>rest.indexOf(d)<0);
-  const keys=Array(7).fill('off'),slots=Array(7).fill(null);
-  if(!avail.length)return{keys,slots};
+function iso(d){const m=d.getMonth()+1,dy=d.getDate();
+  return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(dy<10?'0':'')+dy;}
+const HARDKEYS=['accel_bound','sand_dunes','maxv','lift_led','hill200','accel_blocks','speed_end',
+  'spd_end_short','special_end','se400','split400','int_tempo'];
+
+function weekLayout(cfg,phase,cyc,monday){
+  const rest=restOf(cfg),pins=cfg.pins||{};
+  const keys=Array(7).fill('off'),slots=Array(7).fill(null),moved=Array(7).fill(false);
+
+  /* what the week would normally contain */
   let roles=PHASES[phase].q.slice();
   const ev=ROTATION[cfg.event]?cfg.event:(cfg.event==='mid'?'quarter':'all');
   roles[roles.length-1]=ROTATION[ev][phase][CYCIDX[cyc.n]];
@@ -536,13 +566,39 @@ function weekLayout(cfg,phase,cyc){
     else if(t==='track')roles[0]='accel_blocks';
   }
   if(t==='track'&&roles[roles.length-1]==='hill200')roles[roles.length-1]='special_end';
-  const k=Math.min(roles.length,Math.max(1,avail.length-1));
+
+  /* anything you told the app you actually did stays put */
+  const pinnedDows=[];
+  if(monday) for(let i=0;i<7;i++){
+    const k=pins[iso(addDays(monday,i))];
+    if(!k)continue;
+    keys[i]=k; moved[i]=true; pinnedDows.push(i);
+    const ix=roles.indexOf(k); if(ix>=0)roles.splice(ix,1);
+  }
+  const pinnedHard=pinnedDows.filter(d=>HARDKEYS.indexOf(keys[d])>=0);
+
+  /* days still free: normal training days that aren't already pinned */
+  const avail=[0,1,2,3,4,5,6].filter(d=>rest.indexOf(d)<0&&pinnedDows.indexOf(d)<0);
+  /* a week gets a fixed number of hard days — anything pinned spends part of that budget */
+  const budget=Math.max(0,PHASES[phase].q.length-pinnedHard.length);
+  let k=Math.min(roles.length,budget,Math.max(0,avail.length-1));
   while(roles.length>k){const i=roles.indexOf('lift_led');roles.splice(i>=0?i:roles.length-1,1);}
-  const q=spreadDays(avail,k),SLOT=['A','B','C'];
-  q.forEach((d,i)=>{keys[d]=roles[i];slots[d]=(k===2?(i===0?'A':'C'):SLOT[i]);});
+  /* if there's nowhere left that keeps 48h between hard days, run fewer of them */
+  let q=spreadDays(avail,k,pinnedHard);
+  while(k>0&&minGap(q.concat(pinnedHard))<2){
+    k--;roles.pop();q=spreadDays(avail,k,pinnedHard);
+  }
+  q.forEach((d,i)=>{keys[d]=roles[i];});
+
+  /* lift days follow the hard days, in order across the week */
+  const hard=[0,1,2,3,4,5,6].filter(d=>HARDKEYS.indexOf(keys[d])>=0).sort((a,b)=>a-b);
+  const SLOT=(hard.length<=2)?['A','C']:['A','B','C'];
+  hard.forEach((d,i)=>{if(i<SLOT.length)slots[d]=SLOT[i];});
+
+  /* everything left over: one tempo day, then recovery */
   let td=false;
   avail.filter(d=>q.indexOf(d)<0).forEach(d=>{keys[d]=td?'recovery':PHASES[phase].tempo;td=true;});
-  return{keys,slots};
+  return{keys,slots,moved};
 }
 function gymFor(slot,key,out,c){
   if(key==='off'||key==='race')return[['Gym','none']];
@@ -558,8 +614,10 @@ function seasonOf(monday,cfg){
 }
 function buildDay(date,cfg,anchor,layout,season){
   const out=diffDays(parseISO(cfg.date),date),dow=(date.getDay()+6)%7,rest=restOf(cfg);
+  const pinnedHere=(cfg.pins||{})[iso(date)];
   const{phase,cyc}=season;let mult=cyc.m,key,slot=null;
-  if(out>=0&&out<=6){key=RACEWEEK[out];mult=out<=3?.5:.7;
+  if(pinnedHere&&!(out>=0&&out<=3)){key=pinnedHere;slot=layout.slots[dow];}
+  else if(out>=0&&out<=6){key=RACEWEEK[out];mult=out<=3?.5:.7;
     if(rest.indexOf(dow)>=0&&key!=='race'&&key!=='pre_meet')key='off';
     if(key==='main_high')slot='C';}
   else if(out<0&&AFTERMEET[-out]){key=AFTERMEET[-out];mult=.7;if(rest.indexOf(dow)>=0)key='off';}
@@ -568,10 +626,10 @@ function buildDay(date,cfg,anchor,layout,season){
   const s=(D[key]||D.off)(c);
   if(slot==='A'&&(s.tag==='HARD'||s.tag==='MEDIUM')&&out>6)s.plyo=BOUND[phase];
   s.gym=gymFor(slot,key,out,c).concat(s.extra||[]);
-  return Object.assign({date,key,phase,cycle:cyc.n,load:Math.round(mult*100)},s);
+  return Object.assign({date,key,phase,cycle:cyc.n,load:Math.round(mult*100),moved:!!pinnedHere},s);
 }
 function weekOf(monday,cfg){
-  const season=seasonOf(monday,cfg),layout=weekLayout(cfg,season.phase,season.cyc);
+  const season=seasonOf(monday,cfg),layout=weekLayout(cfg,season.phase,season.cyc,monday);
   return Array.from({length:7},(_,i)=>buildDay(addDays(monday,i),cfg,monday,layout,season));
 }
 
@@ -657,9 +715,30 @@ function render(keep){
     weekOffset===-1?'Last week':weekOffset>0?'In '+weekOffset+' weeks':Math.abs(weekOffset)+' weeks ago';
   $('#w-range').textContent=fmt(monday)+' – '+fmt(addDays(monday,6));
   $('#prev').disabled=weekOffset<=-4;$('#next').disabled=weekOffset>=26;
+  const HK=['accel_bound','sand_dunes','maxv','lift_led','hill200','accel_blocks','speed_end',
+    'spd_end_short','special_end','se400','split400','int_tempo'];
+  const hd=[];week.forEach((d,i)=>{if(HK.indexOf(d.key)>=0)hd.push(i);});
+  $('#warn').innerHTML=(hd.length>1&&minGap(hd)<2)
+    ? `<div class="warnbar"><b>Two hard days in a row this week.</b> That\u2019s usually a day too soon —
+       your legs need about 48 hours between hard sessions. Nothing to fix if it already happened, just
+       go genuinely easy tomorrow.</div>` : '';
   $('#lanes').innerHTML=week.map((d,i)=>laneHTML(d,i,today)).join('');
   $$('.lane .head').forEach(h=>h.onclick=()=>{const l=h.closest('.lane'),o=l.classList.contains('open');
     l.classList.toggle('open',!o);l.querySelector('.detail').classList.toggle('hidden',o);});
+  $$('.acts').forEach(row=>{
+    const key=row.dataset.key, dayISO=row.dataset.iso, pick=row.nextElementSibling;
+    row.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+      const act=b.dataset.act;
+      if(act==='move'){pick.classList.toggle('hidden');return;}
+      if(act==='today'){pinTo(key,iso(midnight(new Date())),dayISO);}
+      if(act==='unpin'){unpin(dayISO);}
+    });
+    if(pick&&pick.classList.contains('daypick'))
+      pick.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+        const mon=addDays(mondayOf(midnight(new Date())),weekOffset*7);
+        pinTo(key,iso(addDays(mon,+b.dataset.day)),dayISO);
+      });
+  });
   if(!keep){const t=$('.lane.today');
     if(t){t.classList.add('open');t.querySelector('.detail').classList.remove('hidden');}window.scrollTo(0,0);}
 }
@@ -670,7 +749,7 @@ function laneHTML(d,i,today){
     <button class="head"><span class="stripe"></span>
       <span class="laneno">${fig(d.tag)}<span>${DAYNAMES[i].slice(0,3)}</span></span>
       <span class="headtxt">
-        <span class="row1"><span class="tag">${d.tag}</span>${isToday?'<span class="todaytag">TODAY</span>':''}</span>
+        <span class="row1"><span class="tag">${d.tag}</span>${isToday?'<span class="todaytag">TODAY</span>':''}${d.moved?'<span class="movedtag">MOVED</span>':''}</span>
         <h3>${d.title}</h3>
         <span class="meta">${fmt(d.date)} · ${v}${d.mins?' · '+d.mins+' min':''}</span>
       </span><span class="chev">▼</span></button>
@@ -681,6 +760,11 @@ function laneHTML(d,i,today){
       ${d.plyo?`<div class="blk"><h4>Jumps — do these on the track</h4><p class="plain">${d.plyo[1]}</p></div>`:''}
       ${gymHTML(d)}
       <div class="why"><b>Why:</b> ${d.why}</div>
+      ${d.key!=='race'?`<div class="acts" data-key="${d.key}" data-iso="${iso(d.date)}">
+        ${!isToday?'<button class="prim" data-act="today">I did this today instead</button>':''}
+        <button data-act="move">Move to another day</button>
+        ${d.moved?'<button data-act="unpin">Put it back</button>':''}
+      </div><div class="daypick hidden">${DAYNAMES.map((n,j)=>`<button data-day="${j}">${n.slice(0,3)}</button>`).join('')}</div>`:''}
       ${d.guide&&d.guide!=='—'?`<p class="cite">Today: ${d.vol?d.vol+'m':(d.tempo?d.tempo+'m':'—')}. Research on top sprinters uses ${d.guide} for this kind of session${d.load<80?' — you\u2019re under it today because this is an easier week':''}.</p>`:''}
     </div></article>`;
 }
@@ -693,6 +777,19 @@ function gymHTML(d){
     return `<div class="blk"><h4>${g[0]}</h4><p class="plain">${g[1]}</p></div>`;
   }).join('');
 }
+function pinTo(key,targetISO,fromISO){
+  cfg.pins=cfg.pins||{};
+  Object.keys(cfg.pins).forEach(k=>{if(cfg.pins[k]===key)delete cfg.pins[k];});
+  if(fromISO&&cfg.pins[fromISO])delete cfg.pins[fromISO];
+  cfg.pins[targetISO]=key;
+  saveCfg(cfg);render(1);
+  toast(targetISO===iso(midnight(new Date()))?'Logged for today — week rebuilt':'Moved — week rebuilt');
+}
+function unpin(dayISO){
+  if(cfg.pins)delete cfg.pins[dayISO];
+  saveCfg(cfg);render(1);toast('Back to the normal week');
+}
+$('#reset').onclick=()=>{cfg.pins={};saveCfg(cfg);render(1);toast('Week reset');};
 $('#copy').onclick=async()=>{
   const monday=addDays(mondayOf(midnight(new Date())),weekOffset*7),wk=weekOf(monday,cfg),meet=parseISO(cfg.date);
   let t=`LANE 4 — week of ${fmt(monday)}\n${cfg.name||'Next meet'}: ${fmtLong(meet)} (${diffDays(meet,midnight(new Date()))} days)\n`;
