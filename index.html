@@ -206,15 +206,6 @@ input[type=date],input[type=text]{width:100%;background:var(--ink2);border:1px s
       <button class="chip" data-v="exp">4+<small>full volume</small></button>
     </div></div>
 
-  <div class="field"><label>What's near you</label>
-    <div class="chips" id="f-terrain">
-      <button class="chip" data-v="track">Just a track</button>
-      <button class="chip" data-v="hills">Hills</button>
-      <button class="chip" data-v="sand">Sand dunes</button>
-      <button class="chip" data-v="both">Hills + sand</button>
-    </div>
-    <p class="hint">Hills and sand get rotated in so it's not the same session every week.</p></div>
-
   <div class="field"><label>Days off</label>
     <div class="chips" id="f-rest">
       <button class="chip" data-v="0">Mon</button><button class="chip" data-v="1">Tue</button>
@@ -266,7 +257,7 @@ input[type=date],input[type=text]{width:100%;background:var(--ink2);border:1px s
       <button id="copy">Copy week</button><button id="reset">Reset week</button><button id="edit">Change meet</button>
     </div>
     <div class="note"><b>How this works.</b>
-      <span style="color:var(--torch)">HARD</span> days are all-out. <span style="color:var(--cool)">EASY</span> days should feel genuinely easy — that's what lets the hard days be hard. <span style="color:var(--amber)">MEDIUM</span> shows up every three weeks for the 400.
+      <span style="color:var(--torch)">HARD</span> days are all-out. <span style="color:var(--cool)">EASY</span> days should feel easy so you're ready for the hard ones. <span style="color:var(--amber)">MEDIUM</span> shows up every three weeks for the 400.
       Never two hard days in a row. Racing every weekend? Just update the meet date each time.</div>
   </main>
 </div>
@@ -302,13 +293,13 @@ const PHASES={
 };
 function phaseFor(w){return w>16?'gpp':w>10?'spp':w>4?'precomp':'comp';}
 const ROTATION={
-  short:{  gpp:['spd_end_short','hill200','spd_end_short'], spp:['spd_end_short','speed_end','spd_end_short'],
+  short:{  gpp:['spd_end_short','speed_end','spd_end_short'], spp:['spd_end_short','speed_end','spd_end_short'],
            precomp:['spd_end_short','speed_end','spd_end_short'], comp:['spd_end_short','spd_end_short','spd_end_short']},
-  long:{   gpp:['spd_end_short','hill200','int_tempo'],     spp:['speed_end','special_end','spd_end_short'],
+  long:{   gpp:['spd_end_short','speed_end','int_tempo'],     spp:['speed_end','special_end','spd_end_short'],
            precomp:['speed_end','special_end','spd_end_short'], comp:['speed_end','spd_end_short','spd_end_short']},
-  quarter:{gpp:['speed_end','hill200','int_tempo'],         spp:['se400','se400','int_tempo'],
+  quarter:{gpp:['speed_end','special_end','int_tempo'],         spp:['se400','se400','int_tempo'],
            precomp:['se400','split400','spd_end_short'],    comp:['speed_end','spd_end_short','spd_end_short']},
-  all:{    gpp:['spd_end_short','hill200','int_tempo'],     spp:['speed_end','se400','int_tempo'],
+  all:{    gpp:['spd_end_short','speed_end','int_tempo'],     spp:['speed_end','se400','int_tempo'],
            precomp:['speed_end','split400','spd_end_short'],comp:['speed_end','spd_end_short','spd_end_short']}
 };
 const CYCIDX={'Building up':0,'Hardest week':1,'Easier week':2};
@@ -341,7 +332,7 @@ const LIFT={
     ['Plank',3,'30 seconds','']]},
   B:{title:'Day B — getting stronger · 5–7 reps',rows:c=>[
     ['Front squat or trap-bar deadlift',4,'6','Heavier than Day A. Every rep should move at the same speed.'],
-    ['Single-leg Romanian deadlift',3,'6 each leg','One leg at a time. Lower slowly. It\u2019s meant to be hard to balance.'],
+    ['Single-leg Romanian deadlift',3,'6 each leg','One leg at a time. Lower slowly. Balancing is part of it.'],
     ['Incline dumbbell press',3,'6',''],
     ['Pull-up with weight, or heavy row',3,'6',''],
     ['Split squat',3,'6 each leg','Back foot up on a bench behind you.']]},
@@ -353,17 +344,17 @@ const LIFT={
     ['Standing broad jump',3,'3','Jump forwards as far as you can from standing. Measure it and try to beat it.']]}
 };
 const BOUND={
-  gpp:['Jumps','Small bouncy hops 3 × 10 · tuck jumps 3 × 8 · line hops 2 × 20. Land quietly — noise means you\u2019re landing badly.'],
+  gpp:['Jumps','Small bouncy hops 3 × 10 · tuck jumps 3 × 8 · line hops 2 × 20. Try to land quietly.'],
   spp:['Bounding','Alternate bounds 4 × 20m · single-leg hops 2 × 15m each · low hurdle hops 4 × 5.'],
-  precomp:['Bounding','Speed bounds 4 × 30m · standing triple jump × 4. Measure it, stop when it drops off.'],
-  comp:['Bounding','Speed bounds 2 × 20m · broad jump × 3. Just staying sharp.']
+  precomp:['Bounding','Speed bounds 4 × 30m · standing triple jump × 4. Measure it and stop if it gets shorter.'],
+  comp:['Bounding','Speed bounds 2 × 20m · broad jump × 3.']
 };
 const CIRCUIT=['Bodyweight circuit','3 rounds, no rush: 10 lunges each leg · 12 push-ups · 15 squats · 10 jumps · 30 seconds plank · 15 glute bridges.'];
 const MEDLOW=['Medicine ball + stretching','Easy medicine ball throws · step over and under hurdles 2 × 6 · 8 minutes stretching.'];
 const THROWS=['Medicine ball throws','Throw it backwards over your head × 5 · forwards from between your legs × 5 · chest pass × 5. Throw hard, rest fully.'];
 const WARM_FULL=['Warm-up · 15 min',['400m jog','Hip circuit: leg swings, walking lunge + twist, glute bridges',
   'Ankling · A-march · A-skip, 2 × 20m each','Dribbles + straight-leg bounds, 2 × 20m',
-  '3–4 × 30m build-ups, last one about 90%','Spikes on. Sit 2 min. Go.']];
+  '3–4 × 30m build-ups, last one about 90%','Spikes on, then start.']];
 const WARM_SHORT=['Warm-up · 10 min',['600m easy jog','Hip circuit','Ankling + A-skip 2 × 20m','2 × 30m relaxed strides']];
 
 /* ================= sessions =================
@@ -376,20 +367,13 @@ function I(k,v,s,rest){return{k,v,s,rest};}
 function m(r,d){return r*d;}
 const D={};
 
-D.accel_bound=c=>{const h=sc(6,c),f=sc(4,c),t=sc(2,c);return{
-  title:'Hill sprints',tag:'HARD',warm:WARM_FULL,guide:'short sprints, 100–300m',
-  track:[I('HILL',h+' × 20m up the hill','Sprint as hard as you can. Walk back down slowly — that walk is your rest.','rest 3–4 min'),
-    I('FLAT',f+' × 20m on flat ground','Start with one hand on the ground. Push hard and stay leaning forward for the first few steps.','rest 3 min'),
-    I('SPEED',t+' × 10m at full speed','Build up over 25m first, then hit full speed for about 10m.','rest 5 min')],
-  extra:[THROWS],vol:m(h,20)+m(f,20)+m(t,35),mins:85,
-  why:'Running uphill makes you push harder, but the hill stops you from going fast enough to pull something. Safest way to work on your start.'};};
-
-D.sand_dunes=c=>{const d=sc(6,c),f=sc(3,c);return{
-  title:'Sand dune sprints',tag:'HARD',warm:WARM_FULL,guide:'short sprints, 100–300m',
-  track:[I('DUNE',d+' × sprint up the dune, 15–25m','As hard as you can. Sand slows you down and is soft to land on, so you can go all out without beating up your legs.','walk down · rest 3–4 min'),
-    I('FLAT',f+' × 20m on hard ground','Right after the dunes. Notice how easy normal ground feels.','rest 3 min')],
-  extra:[THROWS],vol:m(d,20)+m(f,20),mins:80,
-  why:'Sand makes every step harder and every landing softer. An Australian coach named Percy Cerutty trained his runners on dunes all off-season and it worked.'};};
+D.accel_bound=c=>{const h=sc(6,c),f=sc(4,c);return{
+  title:'Resisted sprints',tag:'HARD',warm:WARM_FULL,guide:'short sprints, 100–300m',
+  track:[I('EXERGENIE',h+' × 15m with the ExerGenie, set heavy','Set it so you move at about half your normal speed. Stay low and push.','rest 3 min'),
+    I('FREE','3 × 20m, no resistance','Right after the resisted ones.','rest 3 min'),
+    I('STARTS',f+' × 20m, one hand on the ground','Push hard and stay leaning forward for the first few steps.','rest 3 min')],
+  extra:[THROWS],vol:m(h,15)+60+m(f,20),mins:80,
+  why:'Pulling against the ExerGenie makes you push harder. Sprinting without it right after helps that carry over. No ExerGenie? Use the Activator belt with a partner holding it.'};};
 
 D.maxv=c=>{const w=sc(3,c),s=sc(2,c),f=sc(3,c);return{
   title:'Top speed',tag:'HARD',warm:WARM_FULL,guide:'full-speed running, 50–150m',
@@ -406,68 +390,61 @@ D.lift_led=c=>{const a=sc(4,c),bl=(c.phase==='precomp'||c.phase==='comp');return
   vol:m(a,20),mins:70,
   why:'The weight room is the main part of today. The running is kept short so it doesn\u2019t take anything away from lifting.'};};
 
-D.hill200=c=>{const d=c.level==='first'?100:(c.level==='dev'?150:180),r=c.level==='first'?3:2;return{
-  title:'Long hill runs',tag:'HARD',warm:WARM_FULL,guide:'longer hard runs, 300–900m',
-  track:[I('HILL',r+' × '+d+'m up a hill','Find a long, gentle slope. Run hard but evenly — don\u2019t sprint the first one and die on the second.','rest 12–15 min'),
-    I('AFTER','2 × 30m easy strides','Then walk for 5 minutes before you leave.','')],
-  vol:m(r,d),mins:80,
-  why:'This one is hard. The hill keeps your speed down, which keeps your hamstrings safe while still making you work. Comes up once every three weeks.'};};
-
 D.accel_blocks=c=>{const t=sc(3,c),b=sc(4,c),l=sc(2,c);return{
   title:'Starts',tag:'HARD',warm:WARM_FULL,guide:'short sprints, 100–300m',
   track:[I('SET-UP',t+' × 10m out of the blocks','Just practising. Set the blocks up exactly the same way every time.','rest 2–3 min'),
     I('START',b+' × 30m out of the blocks','Full effort. Get someone to clap or shout to start you.','rest 4–5 min'),
     I('LONGER',l+' × 50m out of the blocks','Stay low and keep building — don\u2019t stand up straight too early.','rest 6 min')],
   extra:[THROWS],vol:m(t,10)+m(b,30)+m(l,50),mins:80,
-  why:'The first 30m is the part of a race you can practise the most. Doing it the same way every time beats doing extra speed work.'};};
+  why:'Starts with full rest. Setting the blocks up the same way every time makes your start more consistent.'};};
 
 D.speed_end=c=>{const d=(c.event==='short')?120:150,r=sc(3,c);return{
   title:'Fast '+d+'s',tag:'HARD',warm:WARM_FULL,guide:'longer hard runs, 300–900m',
-  track:[I('RUN',r+' × '+d+'m'+(c.T?tgt(d===150?c.T.m150:c.T.m200):' — nearly flat out'),'Run hard the whole way. When your form falls apart, the rep is over.','rest 10–12 min'),
+  track:[I('RUN',r+' × '+d+'m'+(c.T?tgt(d===150?c.T.m150:c.T.m200):' — nearly flat out'),'Run hard the whole way. If your form starts to break down, stop the rep.','rest 10–12 min'),
     I('AFTER','2 × 30m easy strides','','')],
   vol:m(r,d),mins:80,
-  why:'This is your 200m workout. Long enough that you run out of gas, short enough that you\u2019re still actually sprinting.'};};
+  why:'Longer sprints for the 200, with a full rest between each one.'};};
 
 D.spd_end_short=c=>{const r=sc(4,c);return{
   title:'Fast 80s',tag:'HARD',warm:WARM_FULL,guide:'longer hard runs, 300–900m',
-  track:[I('RUN',r+' × 80m'+(c.T?tgt(c.T.m80):' — nearly flat out'),'Build up to full speed, then hold it all the way to the end. Try not to tighten up.','rest 8–10 min'),
+  track:[I('RUN',r+' × 80m'+(c.T?tgt(c.T.m80):' — nearly flat out'),'Build up to full speed and stay relaxed to the end.','rest 8–10 min'),
     I('AFTER','2 × 30m easy strides','','')],
   vol:m(r,80),mins:70,
-  why:'Keeps your 60 and 100 sharp. Hard, but short enough that it doesn\u2019t wreck the rest of your week.'};};
+  why:'Sprints a little longer than your race start, with lots of rest. Good for the 60 and 100.'};};
 
 D.special_end=c=>{const r=sc(3,c);return{
   title:'Fast 200s',tag:'HARD',warm:WARM_FULL,guide:'longer hard runs, 300–900m',
-  track:[I('RUN',r+' × 200m'+(c.T?tgt(c.T.m200):' — nearly flat out'),'Long rests. Treat every one like a race.','rest 15–20 min'),
+  track:[I('RUN',r+' × 200m'+(c.T?tgt(c.T.m200):' — nearly flat out'),'Run each one at about race effort. Take the long rest.','rest 15–20 min'),
     I('WALK','Keep walking during the rest','Walk for the first 5 minutes. Sitting down makes you recover slower.','')],
   vol:m(r,200),mins:90,
-  why:'200m race practice, and the stepping stone to the 400. Once your times start sliding, you\u2019re done.'};};
+  why:'Practice for the 200, and good work for the 400. If your times get a lot slower, stop there.'};};
 
 D.se400=c=>{const r=sc(3,c);return{
   title:'Hard 300s',tag:'HARD',warm:WARM_FULL,guide:'longer hard runs, 300–900m',
   track:[I('RUN',r+' × 300m'+(c.T?tgt(c.T.m300):' — hard but not flat out'),'Run them evenly. Try to finish all of them within a second of each other.','rest 12–15 min'),
-    I('WALK','Keep walking during the rest','Walk for the first 5 minutes of every rest. You recover about twice as fast moving as sitting.','')],
+    I('WALK','Keep walking during the rest','Walk for the first 5 minutes of every rest. You recover faster walking than sitting.','')],
   vol:m(r,300),mins:95,
-  why:'The main 400m workout. Teaches you to keep going when your legs go heavy. Hardest thing in here — once a week, no more.'};};
+  why:'The main 400 workout. It\u2019s the toughest session in the plan, so it\u2019s only once a week.'};};
 
 D.split400=c=>({
   title:'400m race practice',tag:'HARD',warm:WARM_FULL,guide:'longer hard runs, 300–900m',
   track:[I('RUN','2 sets of 2 × 200m'+(c.T&&c.T.s1?' — '+c.T.s1+' then '+c.T.s2:' at race pace'),
-    'Only 45 seconds rest between the two 200s. The second one is supposed to feel bad — that\u2019s the end of a 400.','45s inside · 20 min between sets'),
+    'Only 45 seconds rest between the two 200s.','45s inside · 20 min between sets'),
     I('WALK','Don\u2019t sit down','Keep walking through the long rest.','')],
   vol:800,mins:95,
-  why:'The closest thing to actually racing a 400 without racing one. Rehearses what the last 150m feels like.'});
+  why:'Practice for the 400: two 200s at race pace with a short rest between.'});
 
 D.int_tempo=c=>{const s=2,r=sc(4,c);return{
   title:'Medium-hard 200s',tag:'MEDIUM',warm:WARM_FULL,guide:'medium-effort running, 600–2000m',
   track:[I('RUN',s+' × '+r+' × 200m'+(c.T?tgt(c.T.it,'about '):' at about 8 out of 10'),
     'Not a sprint, but not easy either. You should feel it building up as you go.','2 min between runs · 6 min between sets'),
-    I('JOG','Jog easy for 5 minutes after','Don\u2019t skip this. The jog is what clears your legs out.','')],
+    I('JOG','Jog easy for 5 minutes after','An easy jog to cool down.','')],
   extra:[MEDLOW],vol:0,tempo:s*r*200,mins:70,
-  why:'A 400 is mostly about handling heavy legs. Only ever running flat out or slow never teaches you that. This does.'};};
+  why:'Medium-effort running that builds fitness for the 400.'};};
 
 D.speed_short=c=>({
   title:'Quick tune-up',tag:'HARD',warm:WARM_FULL,guide:'short sprints, 100–300m',
-  track:[I('START','4 × 20m out of the blocks','Sharp and fast. You\u2019re rehearsing, not training.','rest 3 min'),
+  track:[I('START','4 × 20m out of the blocks','Fast and short.','rest 3 min'),
     I('SPRINT','2 × 20m at full speed','Fast and relaxed, then go home.','rest 6 min')],
   vol:120,mins:45,
   why:'Last bit of fast running before the meet. Short enough that it leaves you fresh.'});
@@ -478,33 +455,33 @@ D.pre_meet=c=>({
     I('STARTS','2 × start out of the blocks, 15m','Set the blocks up exactly how you will tomorrow.','rest 3 min'),
     I('DONE','Go home','About six seconds of fast running in total. 40 minutes and out.','')],
   vol:90,mins:40,
-  why:'The work is already done. Today is just running through the routine so nothing feels new tomorrow.'});
+  why:'A short practice so your routine feels familiar tomorrow.'});
 
 D.shakeout=c=>({
   title:'Easy loosen-up',tag:'EASY',warm:WARM_SHORT,guide:'—',
   track:[I('EASY','10 minutes easy','Jog, skip, walk. On grass if you can.',''),
     I('DRILLS','Dribbles and A-skips, 4 × 20m','Easy effort.',''),
     I('STRETCH','10 minutes stretching','Hips, calves, hamstrings.','')],
-  vol:0,mins:30,why:'Just enough to feel loose. Sleeping and eating well matter more today than anything you do on the track.'});
+  vol:0,mins:30,why:'Just enough to feel loose. Sleep and eat well today.'});
 
 D.race=c=>({
   title:'RACE DAY',tag:'RACE',guide:'—',warm:['What to do when',
     ['90 minutes before — get there, walk the track, check the schedule','50 minutes before — jog, hips, drills',
      '35 minutes before — spikes on, 3 × 30m build-ups','25 minutes before — 2 starts out of the blocks, 15m',
-     '15 minutes before — stay warm and keep moving, don\u2019t sit down','Get called up. Blocks. Breathe out. Go.']],
-  track:[I('RACE','Your race','First 30m: push and stay low. Middle: relax your face and hands. Last 20m: nothing changes, just keep running.',''),
-    (c.T&&c.T.s1?I('400 PLAN',c.T.s1+' at 200m, '+c.T.s2+' coming home, for '+c.T.goal,'Go through the 200 feeling controlled. If you hit 200m as fast as your open 200, the last 100 is already gone.',''):null),
+     '15 minutes before — stay warm and keep moving, don\u2019t sit down','Get called up and get set in your blocks.']],
+  track:[I('RACE','Your race','First 30m: push and stay low. After that, run tall and stay relaxed.',''),
+    (c.T&&c.T.s1?I('400 PLAN',c.T.s1+' at 200m, '+c.T.s2+' coming home, for '+c.T.goal,'You should feel in control at 200m. If you go out as fast as your open 200, you\u2019ll slow down a lot at the end.',''):null),
     I('AFTER','Cool down','10 minutes jogging, 10 minutes stretching. Write your times down before you forget.','')],
-  vol:0,mins:0,why:'Run the plan you\u2019ve been practising. Either way the times go in the notebook.'});
+  vol:0,mins:0,why:'Run the plan you\u2019ve practiced, then write your times down.'});
 
 D.main_high=c=>{const s=D.spd_end_short(c);s.title='Last hard day';
-  s.why='Last hard session before the meet. Five days is enough to bounce back. Everything after this gets shorter and easier.';return s;};
+  s.why='Last hard workout before the meet. Everything after this is shorter and easier.';return s;};
 
 D.tempo_ext=c=>{const s=2,r=sc(8,c);return{
   title:'Easy 100s',tag:'EASY',warm:WARM_SHORT,guide:'easy running, 1000–2000m',
-  track:[I('RUN',s+' × '+r+' × 100m at about two-thirds effort','On grass if you can. It should feel almost slow — that\u2019s the whole point.','30–45s between runs · 3 min between sets')],
+  track:[I('RUN',s+' × '+r+' × 100m at about two-thirds effort','On grass if you can. It should feel fairly easy.','30–45s between runs · 3 min between sets')],
   extra:[CIRCUIT,MEDLOW],vol:0,tempo:s*r*100,mins:65,
-  why:'Easy running is what makes tomorrow\u2019s hard day actually hard. Run this too fast and you just get tired for nothing.'};};
+  why:'Easy running keeps you fit without tiring you out for tomorrow.'};};
 
 D.tempo_mid=c=>{const s=2,r=sc(6,c);return{
   title:'Easy 100s',tag:'EASY',warm:WARM_SHORT,guide:'easy running, 1000–2000m',
@@ -514,18 +491,18 @@ D.tempo_mid=c=>{const s=2,r=sc(6,c);return{
 D.tempo_light=c=>{const r=sc(8,c);return{
   title:'Easy 100s',tag:'EASY',warm:WARM_SHORT,guide:'easy running, 1000–2000m',
   track:[I('RUN',r+' × 100m, easy','Slow enough that you could hold a conversation at the end of the last one.','45s between')],
-  extra:[MEDLOW],vol:0,tempo:r*100,mins:40,why:'Just getting blood moving. During the season, less is more.'};};
+  extra:[MEDLOW],vol:0,tempo:r*100,mins:40,why:'A short, easy day during the season.'};};
 
 D.recovery=c=>({
   title:'Recovery day',tag:'EASY',warm:WARM_SHORT,guide:'—',
   track:[I('MOVE','15 minutes easy','Jog, bike, or pool. Nothing that leaves you sore.',''),
     I('DRILLS','Dribbles and ankling, 4 × 20m','',''),
     I('STRETCH','Step over and under hurdles, 2 × 6','Then 10 minutes stretching.','')],
-  extra:[MEDLOW],vol:0,mins:35,why:'A recovery day is still a session, it just isn\u2019t hard. Do it properly and your next hard day is better.'});
+  extra:[MEDLOW],vol:0,mins:35,why:'An easy day so you\u2019re ready for the next hard one.'});
 
 D.off=c=>({title:'Day off',tag:'REST',warm:null,guide:'—',
   track:[I('REST','Nothing today','Sleep 8–9 hours. Eat properly. If you\u2019re stiff, walk for 15 minutes and stretch.','')],
-  vol:0,mins:0,why:'You get faster while you rest, not while you train. Skipping days off is how people stop improving.'});
+  vol:0,mins:0,why:'Take the day off. Rest is how you recover from the hard days.'});
 
 /* ================= plan builder ================= */
 function combos(a,k){const o=[];(function r(s,c){if(c.length===k){o.push(c.slice());return;}
@@ -559,13 +536,6 @@ function weekLayout(cfg,phase,cyc,monday){
   let roles=PHASES[phase].q.slice();
   const ev=ROTATION[cfg.event]?cfg.event:(cfg.event==='mid'?'quarter':'all');
   roles[roles.length-1]=ROTATION[ev][phase][CYCIDX[cyc.n]];
-  const t=cfg.terrain||'track';
-  if(phase==='gpp'&&roles[0]==='accel_bound'){
-    if(t==='sand')roles[0]='sand_dunes';
-    else if(t==='both')roles[0]=(cyc.n==='Easier week')?'sand_dunes':'accel_bound';
-    else if(t==='track')roles[0]='accel_blocks';
-  }
-  if(t==='track'&&roles[roles.length-1]==='hill200')roles[roles.length-1]='special_end';
 
   /* anything you told the app you actually did stays put */
   const pinnedDows=[];
@@ -660,13 +630,12 @@ function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');
 let draft={event:'short',level:'dev',rest:[3,6],pr:{},terrain:'track'};
 wireChips('f-event',v=>draft.event=v);
 wireChips('f-level',v=>draft.level=v);
-wireChips('f-terrain',v=>draft.terrain=v);
 function paintRest(){
   $$('#f-rest .chip').forEach(b=>b.classList.toggle('on',draft.rest.indexOf(+b.dataset.v)>=0));
   const n=7-draft.rest.length,h=$('#rest-hint');
   if(n<=0)h.innerHTML='<span style="color:var(--torch)">Leave yourself at least one day to train.</span>';
   else if(n<3)h.innerHTML='<span style="color:var(--torch)">Only '+n+' training day'+(n>1?'s':'')+' — that\u2019s pretty thin.</span>';
-  else if(n>6)h.innerHTML='<span style="color:var(--torch)">Take at least one day off. That\u2019s where the speed comes from.</span>';
+  else if(n>6)h.innerHTML='<span style="color:var(--torch)">Take at least one day off each week.</span>';
   else h.textContent='Training '+n+' days a week.';
 }
 $$('#f-rest .chip').forEach(b=>b.onclick=()=>{const v=+b.dataset.v,i=draft.rest.indexOf(v);
@@ -679,7 +648,7 @@ function showSetup(ex){
   draft.rest=draft.rest.slice();draft.pr=Object.assign({},draft.pr);
   $('#f-date').value=draft.date||'';$('#f-name').value=draft.name||'';
   $('#f-h').value=draft.pr.h||'';$('#f-t').value=draft.pr.t||'';$('#f-q').value=draft.pr.q||'';
-  chipGroup('f-event',draft.event);chipGroup('f-level',draft.level);chipGroup('f-terrain',draft.terrain);paintRest();
+  chipGroup('f-event',draft.event);chipGroup('f-level',draft.level);paintRest();
   $('#cancel').classList.toggle('hidden',!ex);window.scrollTo(0,0);
 }
 $('#go').onclick=()=>{
@@ -719,9 +688,8 @@ function render(keep){
     'spd_end_short','special_end','se400','split400','int_tempo'];
   const hd=[];week.forEach((d,i)=>{if(HK.indexOf(d.key)>=0)hd.push(i);});
   $('#warn').innerHTML=(hd.length>1&&minGap(hd)<2)
-    ? `<div class="warnbar"><b>Two hard days in a row this week.</b> That\u2019s usually a day too soon —
-       your legs need about 48 hours between hard sessions. Nothing to fix if it already happened, just
-       go genuinely easy tomorrow.</div>` : '';
+    ? `<div class="warnbar"><b>Two hard days in a row this week.</b> Your legs need about 48 hours between
+       hard workouts. If it already happened, just keep tomorrow easy.</div>` : '';
   $('#lanes').innerHTML=week.map((d,i)=>laneHTML(d,i,today)).join('');
   $$('.lane .head').forEach(h=>h.onclick=()=>{const l=h.closest('.lane'),o=l.classList.contains('open');
     l.classList.toggle('open',!o);l.querySelector('.detail').classList.toggle('hidden',o);});

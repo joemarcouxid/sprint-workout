@@ -169,7 +169,7 @@ rest of the load is lightest.
 
 | Weeks to the meet | Phase | What changes |
 |---|---|---|
-| 17+ | Off-season | Hills and bounding Monday, uphill 200s or max velocity Friday |
+| 17+ | Off-season | ExerGenie resisted sprints and bounding Monday, longer sprints or max velocity Friday |
 | 11–16 | Pre-season | Max velocity Monday, speed endurance Friday |
 | 5–10 | Sharpening | Same shape, extended bounding, 200m runners get special endurance |
 | 0–4 | Race season | Two lifts, two high days, Wednesday becomes recovery |
@@ -180,12 +180,12 @@ Introduce (80%) → Stabilize (100%) → Unload (60%), repeating. The session *s
 changes; only the number of reps and sets. That consistency is deliberate — it's what makes it
 possible to tell whether the training is working.
 
-### The uphill 200s
+### The track is flat
 
-They run on Stabilize weeks only, off-season and pre-season only — roughly once every three
-weeks, and never inside two weeks of a meet. Distance is scaled by training age: 3 × 100m for
-a first-year athlete, 2 × 150m at two to three years, 2 × 180m after that. The grade caps
-velocity, which is what makes a maximal effort safe for a young hamstring.
+There are no hill or sand sessions. Off-season acceleration work uses the ExerGenie set heavy
+(about half normal speed), followed by free sprints so the extra push carries over; the
+Activator belt with a partner works as a substitute. Resisted sprinting with heavy loads is
+supported for off-season use (Petrakos et al. 2016; Alcaraz et al. 2018).
 
 ### The gym days use movements every high school weight room already has
 
@@ -206,16 +206,6 @@ The kettlebell swing and push press replace the mid-thigh pull and clean pull as
 hip-extension work — same triple-extension pattern, same speed of movement, no catch to teach
 and no specialist coach required. Tony Holler's own high-school program runs on this same
 family of lifts — squat, deadlift, bench, pull-ups — for exactly that reason.
-
-### Terrain variety: hills and sand dunes
-
-Pick what's nearby in setup. If both are available, the off-season Monday session alternates
-across the three-week cycle — regular ground on Introduce and Stabilize weeks, sand dunes on
-Unload. Percy Cerutty ran his athletes' entire off-season conditioning on sand dunes: the loose
-surface increases the work of every stride while cushioning the landing, which makes it one of
-the safer ways to run a high volume of hard efforts, and it removes the risk of a bad fall at
-full speed. The uphill 200s stay on solid ground regardless — that session needs a predictable
-grade to pace against, which sand doesn't give you.
 
 ### The last 7 days are a taper
 
@@ -276,11 +266,11 @@ Everything lives in `index.html`, in the section marked `session library`. Each 
 small function — for example:
 
 ```js
-D.accel_hills = c => {
-  const h = sc(8, c), f = sc(4, c);   // sc() scales reps by phase and training age
+D.accel_bound = c => {
+  const h = sc(6, c), f = sc(4, c);   // sc() scales reps by phase and training age
   return {
-    title: 'Hills & acceleration', tag: 'HIGH', warm: WARM_FULL,
-    track: [ I('HILL', h + ' × 20m hill sprint', 'coaching note', 'rest 3–4 min') ],
+    title: 'Resisted sprints', tag: 'HARD', warm: WARM_FULL,
+    track: [ I('EXERGENIE', h + ' × 15m with the ExerGenie', 'coaching note', 'rest 3 min') ],
     gym: [ GYM[c.phase].A, PLYO[c.phase], THROWS ],
     vol: h * 20 + f * 20, mins: 85,
     why: 'one or two sentences'
@@ -288,8 +278,10 @@ D.accel_hills = c => {
 };
 ```
 
-Change the numbers, the notes, or the lifts in the `GYM` table. Save, push, and bump `CACHE`
-in `sw.js` to `lane4-v2` so phones pick up the new version.
+Change the numbers, the notes, or the lifts in the `LIFT` table. Save, push, and bump `CACHE`
+in `sw.js` (e.g. `lane4-v12`) so phones pick up the new version.
+
+Keep the wording plain and conversational — every line should tell the athlete something they need.
 
 ## A note on safety
 
